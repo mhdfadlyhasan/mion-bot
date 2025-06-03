@@ -1,2 +1,2 @@
 # mion-bot
-Powerfull bot
+望音 a bot
