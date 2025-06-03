@@ -1,0 +1,11 @@
+{
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": false,
+		"editor.detectIndentation": false,
+		"javascript.format.semicolons": "remove",
+		"javascript.format.insertSpaceAfterSemicolonInForStatements": false,
+		"typescript.format.semicolons": "remove"
+}
