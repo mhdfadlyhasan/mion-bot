@@ -1,15 +1,16 @@
 // Require the necessary discord.js classes
-import { Client, Events, GatewayIntentBits, Collection } from 'discord.js'
-import helloCommand from './commands/domains/tools/hello'
-import getTimeCommand from './commands/domains/tools/get_time'
+import { Client, Events, GatewayIntentBits, Collection, REST, Routes } from 'discord.js'
+import helloCommand from './commands/helper/hello'
+import getTimeCommand from './commands/helper/get_time'
+const token = process.env.DISCORD_API_KEY!
+const rest = new REST().setToken(token)
+
 declare module 'discord.js' {
 	export interface Client {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		commands: Collection<any, any>
 	}
 }
-const token = process.env.DISCORD_API_KEY
-
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 
@@ -43,4 +44,25 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 })
 
+
+async function deploy() {
+	try {
+		console.log('Started refreshing application (/) commands.')
+
+		// guild-specific dev env
+		await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID!, process.env.TEST_ENV_GUILD_ID!), {
+			body: Array.from(client.commands.values()).map(command => command.data.toJSON()),
+		})
+		// Todo global, prod
+		// await rest.put(Routes.applicationCommands(CLIENT_ID), {
+		// 	body: Array.from(client.commands.values()).map(command => command.data.toJSON()),
+		// })
+
+		console.log('Successfully reloaded application (/) commands.')
+	} catch (error) {
+		console.error(error)
+	}
+}
+
+deploy()
 client.login(token)
