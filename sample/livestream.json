@@ -1,0 +1,46 @@
+
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "lKs6ReIxc-zsuHSB1El-WHXK_bo",
+  "regionCode": "ID",
+  "pageInfo": {
+    "totalResults": 1,
+    "resultsPerPage": 1
+  },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "bzfpK8w5oybNXIIkrzyXiKciyQQ",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "hsAr4h_Mljw"
+      },
+      "snippet": {
+        "publishedAt": "2022-10-05T15:01:16Z",
+        "channelId": "UCOyYb1c43VlX9rc_lT6NKQw",
+        "title": "【holoID】THIS IS FREE CHAT ROOM. NOT WAITING ROOM. YOU CAN CHAT FREELY【Ayunda Risu】",
+        "description": "Risu_Live #Ayunda_Risu #hololive #holoID #hololive_ID This is not waiting room for stream. This is just a place to chat when ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/hsAr4h_Mljw/default_live.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/hsAr4h_Mljw/mqdefault_live.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/hsAr4h_Mljw/hqdefault_live.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Ayunda Risu Ch. hololive-ID",
+        "liveBroadcastContent": "upcoming",
+        "publishTime": "2022-10-05T15:01:16Z"
+      }
+    }
+  ]
+}

@@ -2,6 +2,7 @@
 import { Client, Events, GatewayIntentBits, Collection, REST, Routes } from 'discord.js'
 import helloCommand from './commands/helper/hello'
 import getTimeCommand from './commands/helper/get_time'
+import livestreamCommand from './commands/domains/livestream-tracker'
 const token = process.env.DISCORD_API_KEY!
 const rest = new REST().setToken(token)
 
@@ -21,6 +22,7 @@ client.once(Events.ClientReady, readyClient => {
 client.commands = new Collection()
 client.commands.set(helloCommand.data.name, helloCommand)
 client.commands.set(getTimeCommand.data.name, getTimeCommand)
+client.commands.set(livestreamCommand.data.name, livestreamCommand)
 
 
 client.on(Events.InteractionCreate, async interaction => {
