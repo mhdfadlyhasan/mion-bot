@@ -1,5 +1,5 @@
-import { SlashCommandBuilder, ChatInputCommandInteraction, MessagePayload } from 'discord.js'
-import type { Livestream } from '../../../data_type/livestream'
+import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
+import type { Livestream } from '../../../data_type/livestream.ts'
 const link = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&eventType=upcoming&channelId=${process.env.TEST_CHANNEL_ID}&key=${process.env.YOUTUBE_API_KEY}`
 
 export default {
@@ -13,7 +13,12 @@ export default {
 				throw new Error(`Network response was not ok. Status: ${response.status}`)
 			}
 			const result = await response.json() as Livestream
-			await interaction.reply(result.items[0].snippet.title)
+			if (result.items.length === 0) {
+				await interaction.reply('No upcoming streams found.')
+				return
+			}
+			const stream = result.items[0]
+			await interaction.reply(stream?.snippet.title ?? '')
 		} catch (error) {
 			console.error('Error fetching livestream info:', error)
 			await interaction.reply({
