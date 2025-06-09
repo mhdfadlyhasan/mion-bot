@@ -2,8 +2,10 @@
 import { Client, Events, GatewayIntentBits, Collection, REST, Routes } from 'discord.js'
 import helloCommand from './commands/helper/hello'
 import getTimeCommand from './commands/helper/get_time'
-import remind_me from './commands/helper/remind_me'
 import livestreamCommand from './commands/domains/livestream-tracker'
+import { sendMessage } from './commands/helper/send_message'
+
+
 const token = process.env.DISCORD_API_KEY!
 const rest = new REST().setToken(token)
 
@@ -18,12 +20,18 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 
 client.once(Events.ClientReady, readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`)
+	const channel = client.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
+	sendMessage(channel!, 'こんにちは, bot is starting!')
+})
+
+client.once(Events.ShardDisconnect, disconnectClient => {
+	const channel = client.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
+	sendMessage(channel!, `Disconnecting! ${disconnectClient.code}`)
 })
 
 client.commands = new Collection()
 client.commands.set(helloCommand.data.name, helloCommand)
 client.commands.set(getTimeCommand.data.name, getTimeCommand)
-client.commands.set(remind_me.data.name, remind_me)
 client.commands.set(livestreamCommand.data.name, livestreamCommand)
 
 
