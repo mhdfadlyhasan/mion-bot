@@ -1,5 +1,6 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
 import type { Livestream } from '../../../data_type/livestream.ts'
+import { redisSet } from '../../../tools/redis.ts/index.ts'
 const link = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&eventType=upcoming&channelId=${process.env.TEST_CHANNEL_ID}&key=${process.env.YOUTUBE_API_KEY}`
 
 export default {
@@ -19,6 +20,7 @@ export default {
 			}
 			const stream = result.items[0]
 			await interaction.reply(stream?.snippet.title ?? '')
+			redisSet('channel_stream:' + process.env.CHANNEL_ID!, stream!.id.videoId)
 		} catch (error) {
 			console.error('Error fetching livestream info:', error)
 			await interaction.reply({
