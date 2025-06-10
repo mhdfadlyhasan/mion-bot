@@ -4,6 +4,7 @@ import helloCommand from './commands/helper/hello'
 import getTimeCommand from './commands/helper/get_time'
 import livestreamCommand from './commands/domains/livestream-tracker'
 import { sendMessage } from './commands/helper/send_message'
+import { redisGet } from './tools/redis.ts'
 
 
 const token = process.env.DISCORD_API_KEY!
@@ -18,10 +19,11 @@ declare module 'discord.js' {
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 
-client.once(Events.ClientReady, readyClient => {
+client.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`)
 	const channel = client.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
-	sendMessage(channel!, 'こんにちは, bot is starting!')
+	const stream_url = await redisGet('channel_stream:' + process.env.CHANNEL_ID!)
+	sendMessage(channel!, 'こんにちは, bot is starting! https://www.youtube.com/watch?v=' + stream_url)
 })
 
 client.once(Events.ShardDisconnect, disconnectClient => {
