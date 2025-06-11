@@ -3,6 +3,7 @@ import { Client, Events, GatewayIntentBits, Collection, REST, Routes } from 'dis
 import helloCommand from './commands/helper/hello'
 import getTimeCommand from './commands/helper/get_time'
 import livestreamCommand from './commands/domains/livestream-tracker'
+import channelSearch from './commands/query/channel-search'
 import { sendMessage } from './commands/helper/send_message'
 import { redisGet } from './tools/redis.ts'
 
@@ -35,6 +36,7 @@ client.commands = new Collection()
 client.commands.set(helloCommand.data.name, helloCommand)
 client.commands.set(getTimeCommand.data.name, getTimeCommand)
 client.commands.set(livestreamCommand.data.name, livestreamCommand)
+client.commands.set(channelSearch.data.name, channelSearch)
 
 
 client.on(Events.InteractionCreate, async interaction => {
