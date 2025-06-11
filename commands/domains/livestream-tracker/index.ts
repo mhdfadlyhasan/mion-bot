@@ -19,7 +19,7 @@ export default {
 				return
 			}
 			const stream = result.items[0]
-			await interaction.reply(stream?.snippet.title ?? '')
+			await interaction.reply('https://www.youtube.com/watch?v=' + stream!.id.videoId)
 			redisSet('channel_stream:' + process.env.CHANNEL_ID!, stream!.id.videoId)
 		} catch (error) {
 			console.error('Error fetching livestream info:', error)

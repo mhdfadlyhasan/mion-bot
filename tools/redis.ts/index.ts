@@ -14,5 +14,5 @@ export async function redisGet(key: string): Promise<string | null> {
 }
 
 export default {
-	RedisClient: redisClient
+	RedisClient: redisClient,
 }
