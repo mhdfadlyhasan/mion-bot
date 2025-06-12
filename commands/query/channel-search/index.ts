@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
 import type { Youtuber } from '../../../data_type/youtuber'
 import type { Livestream } from '../../../data_type/livestream.ts'
-import { redisSet } from '../../../tools/redis.ts/index.ts'
+import { redisSet, redisGet } from '../../../tools/redis.ts/index.ts'
 
 
 export default {
@@ -16,6 +16,11 @@ export default {
 	async execute(interaction: ChatInputCommandInteraction) {
 		try {
 			const name = interaction.options.getString('name', true)
+			const linkInCache = await redisGet(name)
+			if (linkInCache !== null) {
+				await interaction.reply('https://www.youtube.com/watch?v=' + linkInCache as string)
+				return
+			}
 			const link = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${name}}&key=${process.env.YOUTUBE_API_KEY}`
 			const response = await fetch(link)
 			if (!response.ok) {
@@ -38,8 +43,8 @@ export default {
 				return
 			}
 			const stream = result.items[0]
-			await interaction.reply('https://www.youtube.com/watch?v=' + stream!.id.videoId)
-			redisSet('channel_stream:' + youtuber.items[0]?.id.channelId!, stream!.id.videoId)
+			await interaction.reply(youtuber.items[0]?.snippet.channelTitle + 'https://www.youtube.com/watch?v=' + stream!.id.videoId)
+			redisSet(youtuber.items[0]?.snippet.channelTitle as string, stream!.id.videoId)
 		} catch (error) {
 			console.error('Error fetching youtuber info:', error)
 			await interaction.reply({
