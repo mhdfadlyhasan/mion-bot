@@ -2,6 +2,7 @@ import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
 import type { Youtuber } from '../../../data_type/youtuber'
 import type { Livestream } from '../../../data_type/livestream.ts'
 import { redisSet, redisGet } from '../../../tools/redis.ts/index.ts'
+import { getVideoDetail } from '../video-detail-query/index.ts'
 
 
 export default {
@@ -43,7 +44,17 @@ export default {
 				return
 			}
 			const stream = result.items[0]
-			await interaction.reply(youtuber.items[0]?.snippet.channelTitle + 'https://www.youtube.com/watch?v=' + stream!.id.videoId)
+			const videoInfo = await getVideoDetail([String(result.items[0]?.id.videoId)])
+			if (videoInfo === null || typeof videoInfo === 'string') {
+				throw 'Error'
+			}
+			var startTime: string
+			if (videoInfo.items[0]?.liveStreamingDetails.scheduledStartTime == null) {
+				startTime = 'unknown'
+			} else {
+				startTime = new Date(videoInfo.items[0]?.liveStreamingDetails.scheduledStartTime).toLocaleString("en-US", { timeZone: "Asia/Bangkok" })
+			}
+			await interaction.reply('Live time ' + startTime + '\n' + youtuber.items[0]?.snippet.channelTitle + 'https://www.youtube.com/watch?v=' + stream!.id.videoId)
 			redisSet(youtuber.items[0]?.snippet.channelTitle as string, stream!.id.videoId)
 		} catch (error) {
 			console.error('Error fetching youtuber info:', error)

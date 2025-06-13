@@ -16,6 +16,14 @@ type LivestreamItem = {
 			}
 		}
 	}
+	liveStreamingDetails: {
+		actualStartTime: string,
+		actualEndTime: string,
+		scheduledStartTime: string,
+		scheduledEndTime: string,
+		concurrentViewers: number,
+		activeLiveChatId: string
+	}
 }
 
 export type Livestream = {
