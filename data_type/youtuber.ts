@@ -24,4 +24,6 @@ export type Youtuber = {
 	kind: string
 	regionCode: string
 	items: YoutuberItem[]
+	latestStreamTime: string
+	latestStreamLink: string
 }

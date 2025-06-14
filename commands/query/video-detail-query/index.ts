@@ -1,7 +1,6 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
 import type { Youtuber } from '../../../data_type/youtuber'
 import type { Livestream } from '../../../data_type/livestream.ts'
-import { redisSet, redisGet } from '../../../tools/redis.ts/index.ts'
 
 export async function getVideoDetail(idList: string[]): Promise<Livestream | string | null> {
 	try {
@@ -14,7 +13,6 @@ export async function getVideoDetail(idList: string[]): Promise<Livestream | str
 		if (livestream.items.length === 0) {
 			return null
 		}
-		console.log(livestream.items[0]?.liveStreamingDetails)
 		return livestream
 	} catch (error) {
 		console.error('Error fetching livestream info:', error)
