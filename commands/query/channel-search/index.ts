@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
 import type { Youtuber } from '../../../data_type/youtuber'
 import type { Livestream } from '../../../data_type/livestream.ts'
-import { redisSet, redisGet } from '../../../tools/redis.ts/index.ts'
+import { redisSet, redisGet, redisSetJson } from '../../../tools/redis.ts/index.ts'
 import { getVideoDetail } from '../video-detail-query/index.ts'
 
 
@@ -19,7 +19,9 @@ export default {
 			const name = interaction.options.getString('name', true)
 			const linkInCache = await redisGet(name)
 			if (linkInCache !== null) {
-				await interaction.reply('https://www.youtube.com/watch?v=' + linkInCache as string)
+				console.info('using data from redis')
+				const detail = JSON.parse(linkInCache) as Youtuber
+				await interaction.reply('Live time ' + detail.latestStreamTime + '\n' + detail.latestStreamLink)
 				return
 			}
 			const link = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${name}}&key=${process.env.YOUTUBE_API_KEY}`
@@ -56,6 +58,9 @@ export default {
 			}
 			await interaction.reply('Live time ' + startTime + '\n' + youtuber.items[0]?.snippet.channelTitle + 'https://www.youtube.com/watch?v=' + stream!.id.videoId)
 			redisSet(youtuber.items[0]?.snippet.channelTitle as string, stream!.id.videoId)
+			youtuber.latestStreamLink = 'https://www.youtube.com/watch?v=' + stream!.id.videoId
+			youtuber.latestStreamTime = startTime
+			redisSetJson(youtuber.items[0]?.snippet.channelTitle as string, youtuber)
 		} catch (error) {
 			console.error('Error fetching youtuber info:', error)
 			await interaction.reply({

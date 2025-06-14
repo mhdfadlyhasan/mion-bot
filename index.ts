@@ -23,8 +23,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 client.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`)
 	const channel = client.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
-	const stream_url = await redisGet('channel_stream:' + process.env.CHANNEL_ID!)
-	sendMessage(channel!, 'こんにちは, bot is starting! https://www.youtube.com/watch?v=' + stream_url)
+	sendMessage(channel!, 'こんにちは, bot is starting!')
 })
 
 client.once(Events.ShardDisconnect, disconnectClient => {
