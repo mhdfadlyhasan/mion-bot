@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
 import type { Youtuber } from '../../../data_type/youtuber'
-import type { Livestream } from '../../../data_type/livestream.ts'
+import type { Livestream, LivestreamItem } from '../../../data_type/livestream.ts'
 import { redisSetJson, redisGetWildCard } from '../../../tools/redis.ts/index.ts'
 import { getVideoDetail } from '../video-detail-query/index.ts'
 
@@ -43,8 +43,25 @@ export default {
 				await interaction.reply('No upcoming streams found.')
 				return
 			}
-			const stream = result.items[0]
-			const videoInfo = await getVideoDetail([String(result.items[0]?.id.videoId)])
+
+			let upcomingStream: LivestreamItem | null = null
+			for (const item of result.items) {
+				if (item != null && item.snippet != undefined) {
+					const date = new Date(item.snippet.publishedAt)
+					const now = new Date()
+					const limit = new Date()
+					limit.setDate(now.getDate() - Number(process.env.LIVESTREAM_MAX_DAY_LIMIT))
+					if (date > limit) {
+						upcomingStream = item
+						break
+					}
+				}
+			}
+			if (upcomingStream == null) {
+				await interaction.reply('No stream found')
+				return
+			}
+			const videoInfo = await getVideoDetail([String(upcomingStream.id.videoId)])
 			if (videoInfo === null || typeof videoInfo === 'string') {
 				throw 'Error'
 			}
@@ -54,8 +71,8 @@ export default {
 			} else {
 				startTime = new Date(videoInfo.items[0]?.liveStreamingDetails.scheduledStartTime).toLocaleString("en-US", { timeZone: "Asia/Bangkok" })
 			}
-			await interaction.reply('Live time ' + startTime + '\n' + youtuber.items[0]?.snippet.channelTitle + 'https://www.youtube.com/watch?v=' + stream!.id.videoId)
-			youtuber.latestStreamLink = 'https://www.youtube.com/watch?v=' + stream!.id.videoId
+			await interaction.reply('Live time ' + startTime + '\n' + youtuber.items[0]?.snippet.channelTitle + 'https://www.youtube.com/watch?v=' + upcomingStream.id.videoId)
+			youtuber.latestStreamLink = 'https://www.youtube.com/watch?v=' + upcomingStream!.id.videoId
 			youtuber.latestStreamTime = startTime
 			redisSetJson(youtuber.items[0]?.snippet.channelTitle.toLowerCase() as string, youtuber)
 		} catch (error) {

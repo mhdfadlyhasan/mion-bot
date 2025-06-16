@@ -20,7 +20,6 @@ export async function redisGet(key: string): Promise<string | null> {
 
 export async function redisGetWildCard(input: string): Promise<string | null> {
 	const keys = await redisClient.keys('*' + input + '*')
-	console.log(keys)
 	if (keys.length === 0) {
 		return null
 	}
