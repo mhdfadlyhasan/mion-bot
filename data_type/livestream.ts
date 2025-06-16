@@ -1,4 +1,4 @@
-type LivestreamItem = {
+export type LivestreamItem = {
 	id: {
 		videoId: string
 	}
