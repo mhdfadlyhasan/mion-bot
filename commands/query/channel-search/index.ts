@@ -14,14 +14,18 @@ export default {
 				.setRequired(true),
 		),
 	async execute(interaction: ChatInputCommandInteraction) {
+		const now = new Date()
 		try {
 			const name = interaction.options.getString('name', true)
 			const linkInCache = await redisGetWildCard(name.toLowerCase())
 			if (linkInCache !== null) {
-				console.info('using data from redis')
 				const detail = JSON.parse(linkInCache) as Youtuber
-				await interaction.reply('Live time ' + detail.latestStreamTime + '\n' + detail.latestStreamLink)
-				return
+				const liveDate = new Date(detail.latestStreamTime)
+				if (now < liveDate) {
+					console.info('using data from redis')
+					await interaction.reply('Live time ' + detail.latestStreamTime + '\n' + detail.latestStreamLink)
+					return
+				}
 			}
 			const link = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=${name}}&key=${process.env.YOUTUBE_API_KEY}`
 			const response = await fetch(link)
@@ -48,7 +52,6 @@ export default {
 			for (const item of result.items) {
 				if (item != null && item.snippet != undefined) {
 					const date = new Date(item.snippet.publishedAt)
-					const now = new Date()
 					const limit = new Date()
 					limit.setDate(now.getDate() - Number(process.env.LIVESTREAM_MAX_DAY_LIMIT))
 					if (date > limit) {
