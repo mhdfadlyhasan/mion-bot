@@ -3,6 +3,7 @@ import type { Youtuber } from '../../../data_type/youtuber'
 import type { Livestream, LivestreamItem } from '../../../data_type/livestream.ts'
 import { redisSetJson, redisGetWildCard } from '../../../tools/redis.ts/index.ts'
 import { getVideoDetail } from '../video-detail-query/index.ts'
+import { sendMessage } from '../../../tools/client/index.ts'
 
 export default {
 	data: new SlashCommandBuilder()
@@ -24,6 +25,10 @@ export default {
 				if (now < liveDate) {
 					console.info('using data from redis')
 					await interaction.reply('Live time ' + detail.latestStreamTime + '\n' + detail.latestStreamLink)
+					const delay = new Date(detail.latestStreamTime as string).getTime() - Date.now()
+					setTimeout(() => {
+						sendMessage('Its about to start! @everyone \n ' + detail.latestStreamLink)
+					}, delay)
 					return
 				}
 			}
@@ -60,11 +65,7 @@ export default {
 					}
 				}
 			}
-			if (upcomingStream == null) {
-				await interaction.reply('No stream found')
-				return
-			}
-			const videoInfo = await getVideoDetail([String(upcomingStream.id.videoId)])
+			const videoInfo = await getVideoDetail([String(upcomingStream!.id.videoId)])
 			if (videoInfo === null || typeof videoInfo === 'string') {
 				throw 'Error'
 			}
@@ -74,10 +75,14 @@ export default {
 			} else {
 				startTime = new Date(videoInfo.items[0]?.liveStreamingDetails.scheduledStartTime).toLocaleString("en-US", { timeZone: "Asia/Bangkok" })
 			}
-			await interaction.reply('Live time ' + startTime + '\n' + youtuber.items[0]?.snippet.channelTitle + 'https://www.youtube.com/watch?v=' + upcomingStream.id.videoId)
+			await interaction.reply('Live time ' + startTime + '\n' + youtuber.items[0]?.snippet.channelTitle + 'https://www.youtube.com/watch?v=' + upcomingStream!.id.videoId)
 			youtuber.latestStreamLink = 'https://www.youtube.com/watch?v=' + upcomingStream!.id.videoId
 			youtuber.latestStreamTime = startTime
 			redisSetJson(youtuber.items[0]?.snippet.channelTitle.toLowerCase() as string, youtuber)
+			const delay = new Date(startTime as string).getTime() - Date.now()
+			setTimeout(() => {
+				sendMessage('Its about to start! @everyone \n ' + youtuber.latestStreamLink)
+			}, delay)
 		} catch (error) {
 			console.error('Error fetching youtuber info:', error)
 			await interaction.reply({
