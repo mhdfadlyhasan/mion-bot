@@ -24,8 +24,8 @@ export default {
 				const liveDate = new Date(detail.latestStreamTime)
 				if (now < liveDate) {
 					console.info('using data from redis')
-					await interaction.reply('Live time ' + detail.latestStreamTime + '\n' + detail.latestStreamLink)
 					const startTime = new Date(detail.latestStreamTime).toLocaleString("en-US", { timeZone: "Asia/Bangkok" })
+					await interaction.reply('Live time ' + startTime + '\n' + detail.latestStreamLink)
 					const delay = new Date(detail.latestStreamTime as string).getTime() - Date.now()
 					setTimeout(() => {
 						sendMessage('Its about to start! @everyone \n ' + detail.latestStreamLink)
