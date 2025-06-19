@@ -8,7 +8,6 @@ var channel: Channel | undefined
 const token = process.env.DISCORD_API_KEY!
 
 export function sendMessage(message: string) {
-	console.log(channel)
 	if (channel?.type === ChannelType.GuildText) {
 		channel.send(message)
 	}

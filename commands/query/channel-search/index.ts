@@ -24,7 +24,8 @@ export default {
 				const liveDate = new Date(detail.latestStreamTime)
 				if (now < liveDate) {
 					console.info('using data from redis')
-					await interaction.reply('Live time ' + detail.latestStreamTime + '\n' + detail.latestStreamLink)
+					const startTime = new Date(detail.latestStreamTime).toLocaleString("en-US", { timeZone: "Asia/Bangkok" })
+					await interaction.reply('Live time ' + startTime + '\n' + detail.latestStreamLink)
 					const delay = new Date(detail.latestStreamTime as string).getTime() - Date.now()
 					setTimeout(() => {
 						sendMessage('Its about to start! @everyone \n ' + detail.latestStreamLink)
@@ -77,11 +78,11 @@ export default {
 			}
 			await interaction.reply('Live time ' + startTime + '\n' + youtuber.items[0]?.snippet.channelTitle + 'https://www.youtube.com/watch?v=' + upcomingStream!.id.videoId)
 			youtuber.latestStreamLink = 'https://www.youtube.com/watch?v=' + upcomingStream!.id.videoId
-			youtuber.latestStreamTime = startTime
+			youtuber.latestStreamTime = videoInfo.items[0]?.liveStreamingDetails.scheduledStartTime as string
 			redisSetJson(youtuber.items[0]?.snippet.channelTitle.toLowerCase() as string, youtuber)
-			const delay = new Date(startTime as string).getTime() - Date.now()
+			const delay = new Date(youtuber.latestStreamTime as string).getTime() - Date.now()
 			setTimeout(() => {
-				sendMessage('Its about to start! @everyone \n ' + youtuber.latestStreamLink)
+				sendMessage('Its about to start! @everyone \n' + youtuber.latestStreamLink)
 			}, delay)
 		} catch (error) {
 			console.error('Error fetching youtuber info:', error)
