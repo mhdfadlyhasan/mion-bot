@@ -2,7 +2,7 @@ import { ChannelType, Client, Collection, Events, GatewayIntentBits, type Channe
 import helloCommand from '../../commands/helper/hello'
 import getTimeCommand from '../../commands/helper/get_time'
 import livestreamCommand from '../../commands/domains/livestream-tracker'
-import channelSearch from '../../commands/query/channel-search'
+import livestreamerSearch from '../../commands/domains/livestreamer-search'
 const chatClient = await new Client({ intents: [GatewayIntentBits.Guilds] })
 var channel: Channel | undefined
 const token = process.env.DISCORD_API_KEY!
@@ -33,7 +33,7 @@ chatClient.commands = new Collection()
 chatClient.commands.set(helloCommand.data.name, helloCommand)
 chatClient.commands.set(getTimeCommand.data.name, getTimeCommand)
 chatClient.commands.set(livestreamCommand.data.name, livestreamCommand)
-chatClient.commands.set(channelSearch.data.name, channelSearch)
+chatClient.commands.set(livestreamerSearch.data.name, livestreamerSearch)
 
 
 chatClient.on(Events.InteractionCreate, async interaction => {

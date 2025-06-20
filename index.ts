@@ -1,6 +1,7 @@
 // Require the necessary discord.js classes
 import { REST, Routes } from 'discord.js'
 import ChatClient from './tools/client/index.js'
+import { job } from './commands/domains/cron-job/streamer-loader/index.js'
 
 
 const token = process.env.DISCORD_API_KEY!
@@ -26,3 +27,4 @@ async function deploy() {
 }
 
 deploy()
+job.start()
