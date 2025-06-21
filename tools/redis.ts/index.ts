@@ -26,6 +26,10 @@ export async function redisGetWildCard(input: string): Promise<string | null> {
 	return await redisClient.get(keys[0] as any)
 }
 
+export async function redisGetAllKey(): Promise<string[]> {
+	return await redisClient.keys('*')
+}
+
 export default {
 	RedisClient: redisClient,
 }

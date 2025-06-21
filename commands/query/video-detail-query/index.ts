@@ -1,5 +1,3 @@
-import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
-import type { Youtuber } from '../../../data_type/youtuber'
 import type { Livestream } from '../../../data_type/livestream.ts'
 
 export async function getVideoDetail(idList: string[]): Promise<Livestream | string | null> {
