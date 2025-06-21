@@ -1,12 +1,13 @@
 import { CronJob } from 'cron'
 import searchStream from '../../../query/channel-search'
-import { sendMessage } from '../../../../tools/client'
-
+import { redisGetAllKey } from '../../../../tools/redis.ts'
 export const job = new CronJob(
 	process.env.STREAMER_LOADER_CRON!,
 	async function () {
-		console.log(await searchStream('Korone Ch. 戌神ころね'))
-		sendMessage('stream scheduler is evoked')
+		const names = await redisGetAllKey()
+		for (const name of names) {
+			console.log(await searchStream(name))
+		}
 	},
 	null,
 	true,
