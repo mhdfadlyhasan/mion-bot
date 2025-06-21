@@ -8,7 +8,7 @@ export default async function searchStream(name: string): Promise<string> {
 	const now = new Date()
 	try {
 		const linkInCache = await redisGetWildCard(name.toLowerCase())
-		if (linkInCache !== null) {
+		if (linkInCache !== null && linkInCache.length > 0) {
 			const detail = JSON.parse(linkInCache) as Youtuber
 			const liveDate = new Date(detail.latestStreamTime)
 			if (now < liveDate) {
