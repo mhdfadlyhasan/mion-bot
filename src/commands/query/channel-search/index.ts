@@ -1,8 +1,8 @@
-import type { Youtuber } from '../../../data_type/youtuber'
+import type { Youtuber } from '../../../data_type/youtuber.ts'
 import type { Livestream, LivestreamItem } from '../../../data_type/livestream.ts'
-import { redisSetJson, redisGetWildCard } from '../../../tools/redis.ts/index.ts'
 import { getVideoDetail } from '../video-detail-query/index.ts'
 import { sendMessage } from '../../../tools/client/index.ts'
+import { redisGetWildCard, redisSet } from '../../../tools/redis.ts/index.ts'
 
 export default async function searchStream(name: string): Promise<string> {
 	const now = new Date()
@@ -13,11 +13,13 @@ export default async function searchStream(name: string): Promise<string> {
 			const liveDate = new Date(detail.latestStreamTime)
 			if (now < liveDate) {
 				console.info('using data from redis')
-				const startTime = new Date(detail.latestStreamTime).toLocaleString("en-US", { timeZone: "Asia/Bangkok" })
+				const startTime = new Date(detail.latestStreamTime).toLocaleString('en-us', { timeZone: 'Asia/Bangkok' })
 				const delay = new Date(detail.latestStreamTime as string).getTime() - Date.now()
-				if (delay > 0) setTimeout(() => {
-					sendMessage('Its about to start! @everyone \n ' + detail.latestStreamLink)
-				}, delay)
+				if (delay > 0) {
+					setTimeout(() => {
+						sendMessage('Its about to start! @everyone \n' + youtuber.latestStreamLink)
+					}, delay)
+				}
 				return ('Live time ' + startTime + '\n' + detail.latestStreamLink)
 			}
 		}
@@ -58,19 +60,21 @@ export default async function searchStream(name: string): Promise<string> {
 		if (videoInfo === null || typeof videoInfo === 'string') {
 			return 'Error' + videoInfo
 		}
-		var startTime: string
+		let startTime: string
 		if (videoInfo.items[0]?.liveStreamingDetails.scheduledStartTime == null) {
 			startTime = 'unknown'
 		} else {
-			startTime = new Date(videoInfo.items[0]?.liveStreamingDetails.scheduledStartTime).toLocaleString("en-US", { timeZone: "Asia/Bangkok" })
+			startTime = new Date(videoInfo.items[0]?.liveStreamingDetails.scheduledStartTime).toLocaleString('en-us', { timeZone: 'Asia/Bangkok' })
 		}
 		youtuber.latestStreamLink = 'https://www.youtube.com/watch?v=' + upcomingStream!.id.videoId
 		youtuber.latestStreamTime = videoInfo.items[0]?.liveStreamingDetails.scheduledStartTime as string
-		redisSetJson(youtuber.items[0]?.snippet.channelTitle.toLowerCase() as string, youtuber)
+		redisSet(youtuber.items[0]?.snippet.channelTitle.toLowerCase() as string, JSON.stringify(youtuber))
 		const delay = new Date(youtuber.latestStreamTime as string).getTime() - Date.now()
-		if (delay > 0) setTimeout(() => {
-			sendMessage('Its about to start! @everyone \n' + youtuber.latestStreamLink)
-		}, delay)
+		if (delay > 0) {
+			setTimeout(() => {
+				sendMessage('Its about to start! @everyone \n' + youtuber.latestStreamLink)
+			}, delay)
+		}
 		return ('Live time ' + startTime + '\n' + youtuber.items[0]?.snippet.channelTitle + 'https://www.youtube.com/watch?v=' + upcomingStream!.id.videoId)
 	} catch (error) {
 		console.error('Error fetching youtuber info:', error)

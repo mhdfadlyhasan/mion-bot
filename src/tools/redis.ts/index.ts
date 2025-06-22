@@ -9,7 +9,7 @@ export async function redisSet(key: string, input: string): Promise<string | nul
 	return await redisClient.set(key, input)
 }
 
-export async function redisSetJson(key: string, input: any): Promise<string | null> {
+export async function redisSetJson(key: string, input: string): Promise<string | null> {
 	return await redisClient.set(key, JSON.stringify(input))
 }
 
@@ -23,7 +23,7 @@ export async function redisGetWildCard(input: string): Promise<string | null> {
 	if (keys.length === 0) {
 		return null
 	}
-	return await redisClient.get(keys[0] as any)
+	return await redisClient.get(keys[0] as string)
 }
 
 export async function redisGetAllKey(): Promise<string[]> {
