@@ -17,7 +17,7 @@ export default async function searchStream(name: string): Promise<string> {
 				const delay = new Date(detail.latestStreamTime as string).getTime() - Date.now()
 				if (delay > 0) {
 					setTimeout(() => {
-						sendMessage('Its about to start! @everyone \n' + youtuber.latestStreamLink)
+						sendMessage('Its about to start! \n' + youtuber.latestStreamLink)
 					}, delay)
 				}
 				return ('Live time ' + startTime + '\n' + detail.latestStreamLink)
@@ -72,7 +72,7 @@ export default async function searchStream(name: string): Promise<string> {
 		const delay = new Date(youtuber.latestStreamTime as string).getTime() - Date.now()
 		if (delay > 0) {
 			setTimeout(() => {
-				sendMessage('Its about to start! @everyone \n' + youtuber.latestStreamLink)
+				sendMessage('Its about to start! \n' + youtuber.latestStreamLink)
 			}, delay)
 		}
 		return ('Live time ' + startTime + '\n' + youtuber.items[0]?.snippet.channelTitle + 'https://www.youtube.com/watch?v=' + upcomingStream!.id.videoId)
