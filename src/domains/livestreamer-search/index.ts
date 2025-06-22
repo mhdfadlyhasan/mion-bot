@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
-import searchStream from '../../query/channel-search/index.ts'
+import searchStream from '../../commands/query/channel-search'
 
 export default {
 	data: new SlashCommandBuilder()
@@ -16,5 +16,5 @@ export default {
 		if (message !== undefined) {
 			await interaction.reply(message)
 		}
-	}
+	},
 }

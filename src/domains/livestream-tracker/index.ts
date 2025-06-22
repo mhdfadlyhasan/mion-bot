@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
-import type { Livestream } from '../../../data_type/livestream.ts'
-import { redisSet } from '../../../tools/redis.ts/index.ts'
+import type { Livestream } from '../../data_type/livestream'
+import { redisSet } from '../../tools/redis.ts'
 const link = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&eventType=upcoming&channelId=${process.env.TEST_CHANNEL_ID}&key=${process.env.YOUTUBE_API_KEY}`
 
 export default {

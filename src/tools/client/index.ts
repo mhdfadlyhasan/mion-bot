@@ -1,10 +1,9 @@
-import { ChannelType, Client, Collection, Events, GatewayIntentBits, type Channel } from 'discord.js'
+import { ChannelType, Client as DiscordClient, Collection, Events, GatewayIntentBits, type Channel } from 'discord.js'
 import helloCommand from '../../commands/helper/hello'
 import getTimeCommand from '../../commands/helper/get_time'
-import livestreamCommand from '../../commands/domains/livestream-tracker'
-import livestreamerSearch from '../../commands/domains/livestreamer-search'
-const chatClient = await new Client({ intents: [GatewayIntentBits.Guilds] })
-var channel: Channel | undefined
+import livestreamCommand from '../../domains/livestream-tracker'
+import livestreamerSearch from '../../domains/livestreamer-search'
+let channel: Channel | undefined
 const token = process.env.DISCORD_API_KEY!
 
 export function sendMessage(message: string) {
@@ -19,6 +18,8 @@ declare module 'discord.js' {
 		commands: Collection<any, any>
 	}
 }
+
+const chatClient = await new DiscordClient({ intents: [GatewayIntentBits.Guilds] })
 chatClient.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`)
 	channel = chatClient.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
