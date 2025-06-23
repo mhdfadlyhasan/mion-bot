@@ -1,6 +1,6 @@
 import { ChannelType, Client as DiscordClient, Collection, Events, GatewayIntentBits, type Channel } from 'discord.js'
-import helloCommand from '../../commands/helper/hello'
-import getTimeCommand from '../../commands/helper/get_time'
+import helloCommand from '../../helper/hello'
+import getTimeCommand from '../../helper/get_time'
 import livestreamCommand from '../../domains/livestream-tracker'
 import livestreamerSearch from '../../domains/livestreamer-search'
 let channel: Channel | undefined

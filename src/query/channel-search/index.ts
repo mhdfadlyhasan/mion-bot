@@ -1,8 +1,8 @@
-import type { Youtuber } from '../../../data_type/youtuber.ts'
-import type { Livestream, LivestreamItem } from '../../../data_type/livestream.ts'
+import type { Youtuber } from '../../data_type/youtuber.ts'
+import type { Livestream, LivestreamItem } from '../../data_type/livestream.ts'
 import { getVideoDetail } from '../video-detail-query/index.ts'
-import { sendMessage } from '../../../tools/client/index.ts'
-import { redisGetWildCard, redisSet } from '../../../tools/redis.ts/index.ts'
+import { sendMessage } from '../../tools/client/index.ts'
+import { redisGetWildCard, redisSet } from '../../tools/redis.ts/index.ts'
 
 export default async function searchStream(name: string): Promise<string> {
 	const now = new Date()
@@ -17,7 +17,7 @@ export default async function searchStream(name: string): Promise<string> {
 				const delay = new Date(detail.latestStreamTime as string).getTime() - Date.now()
 				if (delay > 0) {
 					setTimeout(() => {
-						sendMessage('Its about to start! \n' + youtuber.latestStreamLink)
+						sendMessage('Its about to start! \n' + detail.latestStreamLink)
 					}, delay)
 				}
 				return ('Live time ' + startTime + '\n' + detail.latestStreamLink)

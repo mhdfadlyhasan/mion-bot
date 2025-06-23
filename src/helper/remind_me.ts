@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
-import { ParseTimeString } from '../../lib/parse_time'
+import { ParseTimeString } from '../lib/parse_time'
 
 export default {
 	data: new SlashCommandBuilder()
