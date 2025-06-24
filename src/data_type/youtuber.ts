@@ -1,4 +1,4 @@
-type YoutuberItem = {
+export type YoutuberItem = {
 	kind: string
 	etag: string
 	id: {
@@ -21,6 +21,8 @@ type YoutuberItem = {
 }
 
 export type Youtuber = {
+	channelID: string | undefined
+	channelName: string | undefined
 	kind: string
 	regionCode: string
 	items: YoutuberItem[]
