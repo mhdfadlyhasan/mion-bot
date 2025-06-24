@@ -3,6 +3,8 @@ import helloCommand from '../../helper/hello'
 import getTimeCommand from '../../helper/get_time'
 import livestreamCommand from '../../domains/livestream-tracker'
 import livestreamerSearch from '../../domains/livestreamer-search'
+import searchStream from '../../query/channel-search'
+import { redisGetAllKey } from '../redis.ts'
 let channel: Channel | undefined
 const token = process.env.DISCORD_API_KEY!
 
@@ -23,6 +25,10 @@ const chatClient = await new DiscordClient({ intents: [GatewayIntentBits.Guilds]
 chatClient.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`)
 	channel = chatClient.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
+	const names = await redisGetAllKey()
+	for (const name of names) {
+		console.log(await searchStream(name))
+	}
 })
 
 chatClient.once(Events.ShardDisconnect, disconnectClient => {

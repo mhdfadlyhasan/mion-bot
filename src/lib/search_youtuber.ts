@@ -9,7 +9,7 @@ export async function searchYoutuberByName(input: string): Promise<Youtuber> {
 	const channel = search.channels
 	const result: Youtuber = {
 		channelID: channel[0]?.author.id,
-		channelName: channel[0]?.author.name,
+		channelName: channel[0]?.author.name.toLowerCase(),
 		latestStreamLink: '',
 		kind: '',
 		regionCode: '',
