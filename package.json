@@ -2,7 +2,8 @@
   "dependencies": {
     "cron": "^4.3.1",
     "discord.js": "^14.19.3",
-    "redis": "^5.5.6"
+    "redis": "^5.5.6",
+    "youtubei.js": "^14.0.0"
   },
   "name": "mion-bot",
   "module": "index.ts",

@@ -7,5 +7,8 @@
 		"editor.detectIndentation": false,
 		"javascript.format.semicolons": "remove",
 		"javascript.format.insertSpaceAfterSemicolonInForStatements": false,
-		"typescript.format.semicolons": "remove"
+		"typescript.format.semicolons": "remove",
+		"[json]": {
+			"editor.defaultFormatter": "vscode.json-language-features"
+		}
 }
