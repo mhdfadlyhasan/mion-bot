@@ -1,9 +1,9 @@
 import type { Youtuber } from '../../data_type/youtuber.ts'
 import type { Livestream, LivestreamItem } from '../../data_type/livestream.ts'
 import { getVideoDetail } from '../video-detail-query/index.ts'
-import { sendMessage } from '../../tools/client/index.ts'
 import { redisGetWildCard, redisSet } from '../../tools/redis.ts/index.ts'
 import { searchYoutuberByName } from '../../lib/search_youtuber.ts'
+import { setNotification } from '../../lib/notification.ts'
 
 export default async function searchStream(name: string): Promise<string> {
 	const now = new Date()
@@ -16,11 +16,7 @@ export default async function searchStream(name: string): Promise<string> {
 				console.info('using data from redis')
 				const startTime = new Date(detail.latestStreamTime).toLocaleString('en-us', { timeZone: 'Asia/Bangkok' })
 				const delay = new Date(detail.latestStreamTime as string).getTime() - Date.now()
-				if (delay > 0) {
-					setTimeout(() => {
-						sendMessage('Its about to start! \n' + detail.latestStreamLink)
-					}, delay)
-				}
+				setNotification(detail.channelID as string, 'Its about to start! \n' + detail.latestStreamLink, delay)
 				return ('Live time ' + startTime + '\n' + detail.latestStreamLink)
 			}
 		}
@@ -63,11 +59,7 @@ export default async function searchStream(name: string): Promise<string> {
 		youtuber.latestStreamTime = videoInfo.items[0]?.liveStreamingDetails.scheduledStartTime as string
 		redisSet(youtuber.channelName!, JSON.stringify(youtuber))
 		const delay = new Date(youtuber.latestStreamTime as string).getTime() - Date.now()
-		if (delay > 0) {
-			setTimeout(() => {
-				sendMessage('Its about to start! \n' + youtuber.latestStreamLink)
-			}, delay)
-		}
+		setNotification(youtuber.channelID as string, 'Its about to start! \n' + youtuber.latestStreamLink, delay)
 		return ('Live time ' + startTime + '\n' + youtuber.channelName + 'https://www.youtube.com/watch?v=' + upcomingStream!.id.videoId)
 	} catch (error) {
 		console.error('Error fetching youtuber info:', error)
