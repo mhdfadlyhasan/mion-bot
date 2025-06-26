@@ -10,7 +10,7 @@ export async function setNotification(name: string, message: string, delay: numb
 		}
 		const timeout = setTimeout(() => {
 			sendMessage(message)
-		}, 10000)
+		}, delay)
 		notificationMap[name] = timeout
 	}
 }
