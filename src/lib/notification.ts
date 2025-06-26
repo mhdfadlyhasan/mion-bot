@@ -1,4 +1,4 @@
-import { sendMessage } from "../tools/client"
+import { sendMessage } from '../tools/client'
 
 const notificationMap: { [key: string]: NodeJS.Timeout | null } = {}
 
@@ -10,7 +10,7 @@ export async function setNotification(name: string, message: string, delay: numb
 		}
 		const timeout = setTimeout(() => {
 			sendMessage(message)
-		}, delay)
+		}, 10000)
 		notificationMap[name] = timeout
 	}
 }

@@ -1,6 +1,6 @@
 import type { Livestream } from '../../data_type/livestream'
 
-export async function getVideoDetail(idList: string[]): Promise<Livestream | string | null> {
+export async function getVideoDetail(idList: string[]): Promise<[string | Livestream | null, string]> {
 	try {
 		const link = `https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${idList.join(',')}&key=${process.env.YOUTUBE_API_KEY}`
 		const response = await fetch(link)
@@ -9,11 +9,17 @@ export async function getVideoDetail(idList: string[]): Promise<Livestream | str
 		}
 		const livestream = await response.json() as Livestream
 		if (livestream.items.length === 0) {
-			return null
+			return [null, '']
 		}
-		return livestream
+		let startTime: string
+		if (livestream.items[0]?.liveStreamingDetails.scheduledStartTime == null) {
+			startTime = 'unknown'
+		} else {
+			startTime = new Date(livestream.items[0]?.liveStreamingDetails.scheduledStartTime).toLocaleString('en-us', { timeZone: 'Asia/Bangkok' })
+		}
+		return [livestream, startTime]
 	} catch (error) {
 		console.error('Error fetching livestream info:', error)
-		return error as string
+		return [error as string, '']
 	}
 }
