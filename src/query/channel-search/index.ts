@@ -9,7 +9,7 @@ export default async function searchStream(name: string): Promise<string> {
 	const now = new Date()
 	const processOutput = function processOutput(detail: Youtuber): string {
 		const startTime = new Date(detail.latestStreamTime).toLocaleString('en-us', { timeZone: 'Asia/Bangkok' })
-		const delay = new Date(detail.latestStreamTime as string).getTime() - Date.now()
+		const delay = new Date(detail.latestStreamTime).getTime() - Date.now()
 		setNotification(detail.channelID as string, 'Its about to start! \n' + detail.latestStreamLink, delay)
 		return ('Live time ' + startTime + '\n' + detail.latestStreamLink)
 	}

@@ -15,7 +15,7 @@ export async function getVideoDetail(idList: string[]): Promise<[string | Livest
 		if (livestream.items[0]?.liveStreamingDetails.scheduledStartTime == null) {
 			startTime = 'unknown'
 		} else {
-			startTime = new Date(livestream.items[0]?.liveStreamingDetails.scheduledStartTime).toLocaleString('en-us', { timeZone: 'Asia/Bangkok' })
+			startTime = new Date(livestream.items[0]?.liveStreamingDetails.scheduledStartTime).toString()
 		}
 		return [livestream, startTime]
 	} catch (error) {
