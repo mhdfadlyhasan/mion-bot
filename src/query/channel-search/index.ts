@@ -1,9 +1,9 @@
 import type { Youtuber } from '../../data_type/youtuber.ts'
-import { getVideoDetail } from '../video-detail-query/index.ts'
 import { redisGetWildCard, redisSet } from '../../tools/redis.ts/index.ts'
-import { searchYoutuberByName } from '../../lib/search_youtuber.ts'
 import { setNotification } from '../../lib/notification.ts'
 import { getYoutuberUpcomingVideo } from '../youtuber-upcoming-video-query/index.ts'
+import { searchYoutuberByName } from '../search-youtuber/index.ts'
+import { getVideoDetail } from '../video-detail/index.ts'
 
 export default async function searchStream(name: string): Promise<string> {
 	const now = new Date()
