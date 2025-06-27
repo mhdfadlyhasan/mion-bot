@@ -1,0 +1,45 @@
+{
+	"meta": {
+		"status": 200
+	},
+	"data": [
+		{
+			"slug": "お大事に",
+			"is_common": true,
+			"tags": [],
+			"jlpt": [
+				"jlpt-n2",
+				"jlpt-n1"
+			],
+			"japanese": [
+				{
+					"word": "お大事に",
+					"reading": "おだいじに"
+				}
+			],
+			"senses": [
+				{
+					"english_definitions": [
+						"take care of yourself",
+						"get well soon"
+					],
+					"parts_of_speech": [
+						"Expressions (phrases, clauses, etc.)"
+					],
+					"links": [],
+					"tags": [],
+					"restrictions": [],
+					"see_also": [],
+					"antonyms": [],
+					"source": [],
+					"info": []
+				}
+			],
+			"attribution": {
+				"jmdict": true,
+				"jmnedict": false,
+				"dbpedia": false
+			}
+		}
+	]
+}
