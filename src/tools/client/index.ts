@@ -27,7 +27,6 @@ declare module 'discord.js' {
 const chatClient = await new DiscordClient({ intents: [GatewayIntentBits.Guilds] })
 chatClient.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`)
-	console.log(await jishoTest("大事にください"))
 	channel = chatClient.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
 	const names = await redisGetAllKey()
 	for (const name of names) {
