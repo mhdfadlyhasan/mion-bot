@@ -4,7 +4,7 @@ import getTimeCommand from '../../commands/get-time/get_time.ts'
 import livestreamCommand from '../../commands/livestream-tracker'
 import livestreamerSearch from '../../commands/livestreamer-search'
 import jishoSearch from '../../commands/jisho-search'
-import jishoTest from '../../query/jisho-search'
+
 
 import { redisGetAllKey } from '../redis.ts'
 import searchStream from '../../query/channel-search/index.ts'
