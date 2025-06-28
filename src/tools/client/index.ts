@@ -4,7 +4,6 @@ import getTimeCommand from '../../commands/get-time/get_time.ts'
 import livestreamCommand from '../../commands/livestream-tracker'
 import livestreamerSearch from '../../commands/livestreamer-search'
 import jishoSearch from '../../commands/jisho-search'
-import jishoTest from '../../query/jisho-search'
 
 import { redisGetAllKey } from '../redis.ts'
 import searchStream from '../../query/channel-search/index.ts'
@@ -27,7 +26,6 @@ declare module 'discord.js' {
 const chatClient = await new DiscordClient({ intents: [GatewayIntentBits.Guilds] })
 chatClient.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`)
-	console.log(await jishoTest("大事にください"))
 	channel = chatClient.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
 	const names = await redisGetAllKey()
 	for (const name of names) {

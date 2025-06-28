@@ -11,10 +11,11 @@ export default {
 				.setRequired(true),
 		),
 	async execute(interaction: ChatInputCommandInteraction) {
-		const name = interaction.options.getString('word', true)
-		const message = await jishoSearch(name)
+		const word = interaction.options.getString('word', true)
+		await interaction.deferReply()
+		const message = await jishoSearch(word)
 		if (message !== undefined) {
-			await interaction.reply(message)
+			await interaction.editReply(`${word}\n${message}`)
 		}
 	},
 }

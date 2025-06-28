@@ -1,5 +1,5 @@
 import type { JishoEntry } from '../../data_type/jisho_entry'
-import { tokenize } from "kuromojin"
+import { tokenize } from 'kuromojin'
 export default async function jishoSearch(word: string): Promise<string> {
 	type JishoResponse = {
 		meta: {
@@ -7,21 +7,22 @@ export default async function jishoSearch(word: string): Promise<string> {
 		}
 		data: JishoEntry[]
 	}
+	word = word.replace(' ', '')
 	async function splitJapanese(text: string) {
 		const tokens = await tokenize(text)
 		return tokens.map(t => ({
 			surface: t.surface_form,
 			reading: t.reading,
-			basicForm: t.basic_form
+			basicForm: t.basic_form,
 		}))
 	}
 	const wordList = await splitJapanese(word)
-	console.log(wordList)
 
 	try {
-		let result: string = ""
-		for (const word of wordList) {
-			const link = `https://jisho.org/api/v1/search/words?keyword=${word.surface}`
+		let result: string = ''
+		for (const token of wordList) {
+			console.log('called')
+			const link = `https://jisho.org/api/v1/search/words?keyword=${token.surface}`
 			const response = await fetch(link)
 			const jsonResponse = await response.json() as JishoResponse
 			const jishoEntry = jsonResponse.data[0] as JishoEntry
