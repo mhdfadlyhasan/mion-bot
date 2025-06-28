@@ -2,6 +2,7 @@
   "dependencies": {
     "cron": "^4.3.1",
     "discord.js": "^14.19.3",
+    "kuromojin": "^3.0.1",
     "redis": "^5.5.6",
     "youtubei.js": "^14.0.0"
   },
