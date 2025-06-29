@@ -7,7 +7,11 @@ export default async function jishoSearch(word: string): Promise<string> {
 		}
 		data: JishoEntry[]
 	}
-	word = word.replace(' ', '')
+	const symbolsToRemove = [' ', ',', '、']
+	const cleaned = word
+		.split('')
+		.map(char => symbolsToRemove.includes(char) ? '' : char)
+		.join('')
 	async function splitJapanese(text: string) {
 		const tokens = await tokenize(text)
 		return tokens.map(t => ({
@@ -16,7 +20,7 @@ export default async function jishoSearch(word: string): Promise<string> {
 			basicForm: t.basic_form,
 		}))
 	}
-	const wordList = await splitJapanese(word)
+	const wordList = await splitJapanese(cleaned)
 
 	try {
 		let result: string = ''
