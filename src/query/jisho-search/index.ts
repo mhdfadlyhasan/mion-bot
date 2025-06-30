@@ -7,7 +7,7 @@ export default async function jishoSearch(word: string): Promise<string> {
 		}
 		data: JishoEntry[]
 	}
-	const symbolsToRemove = [' ', ',', '、']
+	const symbolsToRemove = [' ', ',', '、', '　']
 	const cleaned = word
 		.split('')
 		.map(char => symbolsToRemove.includes(char) ? '' : char)
@@ -18,18 +18,27 @@ export default async function jishoSearch(word: string): Promise<string> {
 			surface: t.surface_form,
 			reading: t.reading,
 			basicForm: t.basic_form,
+			conjugated_form: t.conjugated_form,
+			word_position: t.word_position,
+			pos: t.pos,
 		}))
+
+
 	}
 	const wordList = await splitJapanese(cleaned)
-
 	try {
 		let result: string = ''
 		for (const token of wordList) {
-			const link = `https://jisho.org/api/v1/search/words?keyword=${token.surface}`
+			word = token.surface
+			if (token.pos == '助詞') {
+				//	particle
+				word += ' %23particle'
+			}
+			const link = `https://jisho.org/api/v1/search/words?keyword=${word}`
 			const response = await fetch(link)
 			const jsonResponse = await response.json() as JishoResponse
 			const jishoEntry = jsonResponse.data[0] as JishoEntry
-			const entry = `**${jishoEntry.slug}** (${jishoEntry.is_common ? 'common' : 'uncommon'})\n Reading:[**${jishoEntry.japanese[0].reading}**], Meaning: ${jishoEntry.senses[0].english_definitions.join(', ')}\n`
+			const entry = `**${jishoEntry.slug == null ? '' : jishoEntry.slug}** (${jishoEntry.is_common ? 'common' : 'uncommon'})\n Reading:[**${jishoEntry.japanese[0].reading}**], Meaning: ${jishoEntry.senses[0].english_definitions.join(', ')}\n`
 			result += entry
 		}
 		return result
