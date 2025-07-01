@@ -1,45 +1,333 @@
-{
-	"meta": {
-		"status": 200
-	},
-	"data": [
-		{
-			"slug": "お大事に",
-			"is_common": true,
-			"tags": [],
-			"jlpt": [
-				"jlpt-n2",
-				"jlpt-n1"
-			],
-			"japanese": [
-				{
-					"word": "お大事に",
-					"reading": "おだいじに"
-				}
-			],
-			"senses": [
-				{
-					"english_definitions": [
-						"take care of yourself",
-						"get well soon"
-					],
-					"parts_of_speech": [
-						"Expressions (phrases, clauses, etc.)"
-					],
-					"links": [],
-					"tags": [],
-					"restrictions": [],
-					"see_also": [],
-					"antonyms": [],
-					"source": [],
-					"info": []
-				}
-			],
-			"attribution": {
-				"jmdict": true,
-				"jmnedict": false,
-				"dbpedia": false
+query: {
+    strRaw: "見えてない",
+    str: "見えてない",
+    strSplit: [
+		"見えてない"
+	],
+    strJapanese: "見えてない",
+    strJapaneseSplit: [
+		"見えてない"
+	],
+    strHiragana: "見えてない",
+    kanji: [
+		"見"
+	],
+    inflectionBreakdown: [
+		[
+			{
+          ruleId: "aux-iru",
+          sourceTerm: "見えてな",
+          sourceCategory: "vte",
+          targetTerm: "見えてないる",
+          targetCategory: "v1",
+			},
+			{
+          ruleId: "continuative",
+          sourceTerm: "見えてないる",
+          sourceCategory: "v1",
+          targetTerm: "見えてない",
+          targetCategory: "n",
 			}
-		}
+		],
+		[
+			{
+          ruleId: "continuative",
+          sourceTerm: "見えてないる",
+          sourceCategory: "v1-s",
+          targetTerm: "見えてない",
+          targetCategory: "n",
+			}
+		],
+		[
+			{
+          ruleId: "continuative",
+          sourceTerm: "見えてなる",
+          sourceCategory: "v5aru",
+          targetTerm: "見えてない",
+          targetCategory: "n",
+			}
+		],
+		[
+			{
+          ruleId: "continuative",
+          sourceTerm: "見えてなう",
+          sourceCategory: "v5u",
+          targetTerm: "見えてない",
+          targetCategory: "n",
+			}
+		],
+		[
+			{
+          ruleId: "continuative",
+          sourceTerm: "見えてなう",
+          sourceCategory: "v5u-s",
+          targetTerm: "見えてない",
+          targetCategory: "n",
+			}
+		],
+		[
+			{
+          ruleId: "potential",
+          sourceTerm: "見えつ",
+          sourceCategory: "v5t",
+          targetTerm: "見えてる",
+          targetCategory: "v1",
+			},
+			{
+          ruleId: "negative",
+          sourceTerm: "見えてる",
+          sourceCategory: "v1",
+          targetTerm: "見えてない",
+          targetCategory: "adj-i",
+			}
+		],
+		[
+			{
+          ruleId: "negative",
+          sourceTerm: "見えてる",
+          sourceCategory: "v1-s",
+          targetTerm: "見えてない",
+          targetCategory: "adj-i",
+			}
+		],
+		[
+			{
+          ruleId: "negative",
+          sourceTerm: "見えてある",
+          sourceCategory: "v5r-i",
+          targetTerm: "見えてない",
+          targetCategory: "adj-i",
+			}
+		],
+		[
+			{
+          ruleId: "potential",
+          sourceTerm: "見う",
+          sourceCategory: "v5u",
+          targetTerm: "見える",
+          targetCategory: "v1",
+			},
+			{
+          ruleId: "conjunctive",
+          sourceTerm: "見える",
+          sourceCategory: "v1",
+          targetTerm: "見えて",
+          targetCategory: "vte",
+			},
+			{
+          ruleId: "aux-iru-contracted",
+          sourceTerm: "見えて",
+          sourceCategory: "vte",
+          targetTerm: "見えてる",
+          targetCategory: "v1contr",
+			},
+			{
+          ruleId: "negative",
+          sourceTerm: "見えてる",
+          sourceCategory: "v1contr",
+          targetTerm: "見えてない",
+          targetCategory: "adj-i",
+			}
+		],
+		[
+			{
+          ruleId: "potential",
+          sourceTerm: "見う",
+          sourceCategory: "v5u-s",
+          targetTerm: "見える",
+          targetCategory: "v1",
+			},
+			{
+          ruleId: "conjunctive",
+          sourceTerm: "見える",
+          sourceCategory: "v1",
+          targetTerm: "見えて",
+          targetCategory: "vte",
+			},
+			{
+          ruleId: "aux-iru-contracted",
+          sourceTerm: "見えて",
+          sourceCategory: "vte",
+          targetTerm: "見えてる",
+          targetCategory: "v1contr",
+			},
+			{
+          ruleId: "negative",
+          sourceTerm: "見えてる",
+          sourceCategory: "v1contr",
+          targetTerm: "見えてない",
+          targetCategory: "adj-i",
+			}
+		],
+		[
+			{
+          ruleId: "potential-eru",
+          sourceTerm: "見る",
+          sourceCategory: "v1",
+          targetTerm: "見える",
+          targetCategory: "v1",
+			},
+			{
+          ruleId: "conjunctive",
+          sourceTerm: "見える",
+          sourceCategory: "v1",
+          targetTerm: "見えて",
+          targetCategory: "vte",
+			},
+			{
+          ruleId: "aux-iru-contracted",
+          sourceTerm: "見えて",
+          sourceCategory: "vte",
+          targetTerm: "見えてる",
+          targetCategory: "v1contr",
+			},
+			{
+          ruleId: "negative",
+          sourceTerm: "見えてる",
+          sourceCategory: "v1contr",
+          targetTerm: "見えてない",
+          targetCategory: "adj-i",
+			}
+		],
+		[
+			{
+          ruleId: "potential-eru",
+          sourceTerm: "見る",
+          sourceCategory: "v1-s",
+          targetTerm: "見える",
+          targetCategory: "v1",
+			},
+			{
+          ruleId: "conjunctive",
+          sourceTerm: "見える",
+          sourceCategory: "v1",
+          targetTerm: "見えて",
+          targetCategory: "vte",
+			},
+			{
+          ruleId: "aux-iru-contracted",
+          sourceTerm: "見えて",
+          sourceCategory: "vte",
+          targetTerm: "見えてる",
+          targetCategory: "v1contr",
+			},
+			{
+          ruleId: "negative",
+          sourceTerm: "見えてる",
+          sourceCategory: "v1contr",
+          targetTerm: "見えてない",
+          targetCategory: "adj-i",
+			}
+		],
+		[
+			{
+          ruleId: "conjunctive",
+          sourceTerm: "見える",
+          sourceCategory: "v1-s",
+          targetTerm: "見えて",
+          targetCategory: "vte",
+			},
+			{
+          ruleId: "aux-iru-contracted",
+          sourceTerm: "見えて",
+          sourceCategory: "vte",
+          targetTerm: "見えてる",
+          targetCategory: "v1contr",
+			},
+			{
+          ruleId: "negative",
+          sourceTerm: "見えてる",
+          sourceCategory: "v1contr",
+          targetTerm: "見えてない",
+          targetCategory: "adj-i",
+			}
+		],
+		[
+			{
+          ruleId: "aux-iru-contracted",
+          sourceTerm: "見え",
+          sourceCategory: "vte",
+          targetTerm: "見える",
+          targetCategory: "v1contr",
+			},
+			{
+          ruleId: "conjunctive",
+          sourceTerm: "見える",
+          sourceCategory: "v1contr",
+          targetTerm: "見えて",
+          targetCategory: "vte",
+			},
+			{
+          ruleId: "aux-iru-contracted",
+          sourceTerm: "見えて",
+          sourceCategory: "vte",
+          targetTerm: "見えてる",
+          targetCategory: "v1contr",
+			},
+			{
+          ruleId: "negative",
+          sourceTerm: "見えてる",
+          sourceCategory: "v1contr",
+          targetTerm: "見えてない",
+          targetCategory: "adj-i",
+			}
+		],
+		[
+			{
+          ruleId: "imperative",
+          sourceTerm: "見えてないる",
+          sourceCategory: "v1-s",
+          targetTerm: "見えてない",
+          targetCategory: "unc",
+			}
+		],
+		[
+			{
+          ruleId: "imperative",
+          sourceTerm: "見えてなる",
+          sourceCategory: "v5aru",
+          targetTerm: "見えてない",
+          targetCategory: "unc",
+			}
+		]
+	],
+    tags: [],
+},
+  entries: [
+	{
+      type: "section",
+      section: "inflected",
+	},
+	{
+      senses: [
+			{
+          gloss: [
+					"to be seen",
+					"to be visible",
+					"to be in sight"
+				],
+          examples: [
+					{
+              term: "見えた",
+              ja: "聖霊がある方の上に下って、その上にとどまられるのが見えたなら、その方こそ聖霊によってバプテスマを授ける方である。",
+              en: "The man on whom you see the Spirit come down and remain is he who will baptize with the Holy Spirit.",
+					}
+				],
+			},
+			{
+          gloss: [
+					"to look",
+					"to seem",
+					"to appear"
+				],
+          examples: [
+					{
+              term: "見える",
+              ja: "１１ページの地図はとても奇妙に見える。逆さまにしてみると、見慣れた地図になる。",
+              en: "The map on page 11 looks very strange. Turn it upside down. Then it becomes a familiar map to you.",
+					}
+				],
+			},
+		],
 	]
 }

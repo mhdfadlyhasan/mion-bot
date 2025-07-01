@@ -1,30 +1,43 @@
-export type JishoEntry = {
-	slug: string
-	is_common: boolean,
-	jlpt: string[],
-	japanese: [
-		{
-			word: string,
-			reading: string
-		}
-	],
-	senses: [
-		{
-			english_definitions: string[],
-			parts_of_speech: string[],
-			links: [],
-			tags: [],
-			restrictions: [],
-			see_also: [],
-			antonyms: string[],
-			source: [],
-			info: []
-		}
-		// tags: [],
-	],
-	// attribution: {
-	// 	jmdict: true,
-	// 	jmnedict: false,
-	// 	dbpedia: false
-	// }
+type InflectionStep = {
+	ruleId: string
+	sourceTerm: string
+	sourceCategory: string
+	targetTerm: string
+	targetCategory: string
+}
+
+type InflectionPath = InflectionStep[]
+
+type QueryData = {
+	strRaw: string
+	str: string
+	strSplit: string[]
+	strJapanese: string
+	strJapaneseSplit: string[]
+	strHiragana: string
+	kanji: string[]
+	inflectionBreakdown: InflectionPath[]
+	tags: string[]
+}
+
+type Example = {
+	term: string
+	ja: string
+	en: string
+}
+
+type Sense = {
+	gloss: string[]
+	examples?: Example[]
+}
+
+export type Entry = {
+	type?: string
+	section?: string
+	senses?: Sense[]
+}
+
+export type Jisho = {
+	query: QueryData
+	entries: Entry[]
 }
