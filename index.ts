@@ -15,8 +15,8 @@ async function deploy() {
 			body: Array.from(ChatClient.ChatClient.commands.values()).map(command => command.data.toJSON()),
 		})
 		// Todo global, prod
-		// await rest.put(Routes.applicationCommands(CLIENT_ID), {
-		// 	body: Array.from(client.commands.values()).map(command => command.data.toJSON()),
+		// await rest.put(Routes.applicationCommands(process.env.CLIENT_ID!), {
+		// 	body: Array.from(ChatClient.ChatClient.commands.values()).map(command => command.data.toJSON()),
 		// })
 
 		console.log('Successfully reloaded application (/) commands.')

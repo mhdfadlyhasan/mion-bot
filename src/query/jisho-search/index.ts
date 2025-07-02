@@ -99,17 +99,17 @@ export default async function jishoSearch(input: string): Promise<string> {
 }
 
 const searchJisho = async (word: string): Promise<Jisho> => {
-	const url = "https://jisho.hlorenzi.com/api/v1/search"
+	const url = 'https://jisho.hlorenzi.com/api/v1/search'
 	const payload = {
 		query: word,
-		limit: 2
+		limit: 1,
 	}
 
 	try {
 		const response = await fetch(url, {
-			method: "POST",
+			method: 'POST',
 			headers: {
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(payload),
 		})
@@ -122,7 +122,7 @@ const searchJisho = async (word: string): Promise<Jisho> => {
 		const data = await response.json() as Jisho
 		return data
 	} catch (err) {
-		console.error("Fetch error:", err)
-		return null as any
+		console.error('Fetch error:', err)
+		return null as unknown as Jisho
 	}
 }

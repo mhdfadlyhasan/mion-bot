@@ -1,333 +1,1202 @@
-query: {
-    strRaw: "見えてない",
-    str: "見えてない",
-    strSplit: [
-		"見えてない"
-	],
-    strJapanese: "見えてない",
-    strJapaneseSplit: [
-		"見えてない"
-	],
-    strHiragana: "見えてない",
-    kanji: [
-		"見"
-	],
-    inflectionBreakdown: [
-		[
+{
+	"query": {
+		"type": "any",
+		"strRaw": "できない",
+		"str": "できない",
+		"strSplit": [
+			"できない"
+		],
+		"strJapanese": "できない",
+		"strJapaneseSplit": [
+			"できない"
+		],
+		"strHiragana": "できない",
+		"strInQuotes": "",
+		"strInQuotesSplit": [],
+		"strWildcards": "",
+		"strWildcardsHiragana": "",
+		"kanji": [],
+		"components": [
+			"で",
+			"き",
+			"な",
+			"い"
+		],
+		"inflectionBreakdown": [
+			[
+				{
+					"ruleId": "aux-iru",
+					"sourceTerm": "できな",
+					"sourceCategory": "vte",
+					"targetTerm": "できないる",
+					"targetCategory": "v1"
+				},
+				{
+					"ruleId": "continuative",
+					"sourceTerm": "できないる",
+					"sourceCategory": "v1",
+					"targetTerm": "できない",
+					"targetCategory": "n"
+				}
+			],
+			[
+				{
+					"ruleId": "continuative",
+					"sourceTerm": "できないる",
+					"sourceCategory": "v1-s",
+					"targetTerm": "できない",
+					"targetCategory": "n"
+				}
+			],
+			[
+				{
+					"ruleId": "continuative",
+					"sourceTerm": "できなる",
+					"sourceCategory": "v5aru",
+					"targetTerm": "できない",
+					"targetCategory": "n"
+				}
+			],
+			[
+				{
+					"ruleId": "continuative",
+					"sourceTerm": "できなう",
+					"sourceCategory": "v5u",
+					"targetTerm": "できない",
+					"targetCategory": "n"
+				}
+			],
+			[
+				{
+					"ruleId": "continuative",
+					"sourceTerm": "できなう",
+					"sourceCategory": "v5u-s",
+					"targetTerm": "できない",
+					"targetCategory": "n"
+				}
+			],
+			[
+				{
+					"ruleId": "potential",
+					"sourceTerm": "する",
+					"sourceCategory": "vs-i",
+					"targetTerm": "できる",
+					"targetCategory": "v1"
+				},
+				{
+					"ruleId": "negative",
+					"sourceTerm": "できる",
+					"sourceCategory": "v1",
+					"targetTerm": "できない",
+					"targetCategory": "adj-i"
+				}
+			],
+			[
+				{
+					"ruleId": "potential",
+					"sourceTerm": "する",
+					"sourceCategory": "vs-s",
+					"targetTerm": "できる",
+					"targetCategory": "v1"
+				},
+				{
+					"ruleId": "negative",
+					"sourceTerm": "できる",
+					"sourceCategory": "v1",
+					"targetTerm": "できない",
+					"targetCategory": "adj-i"
+				}
+			],
+			[
+				{
+					"ruleId": "negative",
+					"sourceTerm": "できる",
+					"sourceCategory": "v1-s",
+					"targetTerm": "できない",
+					"targetCategory": "adj-i"
+				}
+			],
+			[
+				{
+					"ruleId": "negative",
+					"sourceTerm": "できある",
+					"sourceCategory": "v5r-i",
+					"targetTerm": "できない",
+					"targetCategory": "adj-i"
+				}
+			],
+			[
+				{
+					"ruleId": "aux-iru-contracted",
+					"sourceTerm": "でき",
+					"sourceCategory": "vte",
+					"targetTerm": "できる",
+					"targetCategory": "v1contr"
+				},
+				{
+					"ruleId": "negative",
+					"sourceTerm": "できる",
+					"sourceCategory": "v1contr",
+					"targetTerm": "できない",
+					"targetCategory": "adj-i"
+				}
+			],
+			[
+				{
+					"ruleId": "imperative",
+					"sourceTerm": "できないる",
+					"sourceCategory": "v1-s",
+					"targetTerm": "できない",
+					"targetCategory": "unc"
+				}
+			],
+			[
+				{
+					"ruleId": "imperative",
+					"sourceTerm": "できなる",
+					"sourceCategory": "v5aru",
+					"targetTerm": "できない",
+					"targetCategory": "unc"
+				}
+			]
+		],
+		"inflectionOf": [
 			{
-          ruleId: "aux-iru",
-          sourceTerm: "見えてな",
-          sourceCategory: "vte",
-          targetTerm: "見えてないる",
-          targetCategory: "v1",
+				"term": "できな",
+				"category": "vte"
 			},
 			{
-          ruleId: "continuative",
-          sourceTerm: "見えてないる",
-          sourceCategory: "v1",
-          targetTerm: "見えてない",
-          targetCategory: "n",
+				"term": "できないる",
+				"category": "v1"
+			},
+			{
+				"term": "できないる",
+				"category": "v1-s"
+			},
+			{
+				"term": "できなる",
+				"category": "v5aru"
+			},
+			{
+				"term": "できなう",
+				"category": "v5u"
+			},
+			{
+				"term": "できなう",
+				"category": "v5u-s"
+			},
+			{
+				"term": "する",
+				"category": "vs-i"
+			},
+			{
+				"term": "できる",
+				"category": "v1"
+			},
+			{
+				"term": "する",
+				"category": "vs-s"
+			},
+			{
+				"term": "できる",
+				"category": "v1-s"
+			},
+			{
+				"term": "できある",
+				"category": "v5r-i"
+			},
+			{
+				"term": "でき",
+				"category": "vte"
+			},
+			{
+				"term": "できる",
+				"category": "v1contr"
 			}
 		],
-		[
-			{
-          ruleId: "continuative",
-          sourceTerm: "見えてないる",
-          sourceCategory: "v1-s",
-          targetTerm: "見えてない",
-          targetCategory: "n",
-			}
+		"canBeDefinition": false,
+		"canBeWildcards": false,
+		"canBeSentence": true,
+		"tags": [],
+		"inverseTags": [
+			"name"
 		],
-		[
-			{
-          ruleId: "continuative",
-          sourceTerm: "見えてなる",
-          sourceCategory: "v5aru",
-          targetTerm: "見えてない",
-          targetCategory: "n",
-			}
-		],
-		[
-			{
-          ruleId: "continuative",
-          sourceTerm: "見えてなう",
-          sourceCategory: "v5u",
-          targetTerm: "見えてない",
-          targetCategory: "n",
-			}
-		],
-		[
-			{
-          ruleId: "continuative",
-          sourceTerm: "見えてなう",
-          sourceCategory: "v5u-s",
-          targetTerm: "見えてない",
-          targetCategory: "n",
-			}
-		],
-		[
-			{
-          ruleId: "potential",
-          sourceTerm: "見えつ",
-          sourceCategory: "v5t",
-          targetTerm: "見えてる",
-          targetCategory: "v1",
-			},
-			{
-          ruleId: "negative",
-          sourceTerm: "見えてる",
-          sourceCategory: "v1",
-          targetTerm: "見えてない",
-          targetCategory: "adj-i",
-			}
-		],
-		[
-			{
-          ruleId: "negative",
-          sourceTerm: "見えてる",
-          sourceCategory: "v1-s",
-          targetTerm: "見えてない",
-          targetCategory: "adj-i",
-			}
-		],
-		[
-			{
-          ruleId: "negative",
-          sourceTerm: "見えてある",
-          sourceCategory: "v5r-i",
-          targetTerm: "見えてない",
-          targetCategory: "adj-i",
-			}
-		],
-		[
-			{
-          ruleId: "potential",
-          sourceTerm: "見う",
-          sourceCategory: "v5u",
-          targetTerm: "見える",
-          targetCategory: "v1",
-			},
-			{
-          ruleId: "conjunctive",
-          sourceTerm: "見える",
-          sourceCategory: "v1",
-          targetTerm: "見えて",
-          targetCategory: "vte",
-			},
-			{
-          ruleId: "aux-iru-contracted",
-          sourceTerm: "見えて",
-          sourceCategory: "vte",
-          targetTerm: "見えてる",
-          targetCategory: "v1contr",
-			},
-			{
-          ruleId: "negative",
-          sourceTerm: "見えてる",
-          sourceCategory: "v1contr",
-          targetTerm: "見えてない",
-          targetCategory: "adj-i",
-			}
-		],
-		[
-			{
-          ruleId: "potential",
-          sourceTerm: "見う",
-          sourceCategory: "v5u-s",
-          targetTerm: "見える",
-          targetCategory: "v1",
-			},
-			{
-          ruleId: "conjunctive",
-          sourceTerm: "見える",
-          sourceCategory: "v1",
-          targetTerm: "見えて",
-          targetCategory: "vte",
-			},
-			{
-          ruleId: "aux-iru-contracted",
-          sourceTerm: "見えて",
-          sourceCategory: "vte",
-          targetTerm: "見えてる",
-          targetCategory: "v1contr",
-			},
-			{
-          ruleId: "negative",
-          sourceTerm: "見えてる",
-          sourceCategory: "v1contr",
-          targetTerm: "見えてない",
-          targetCategory: "adj-i",
-			}
-		],
-		[
-			{
-          ruleId: "potential-eru",
-          sourceTerm: "見る",
-          sourceCategory: "v1",
-          targetTerm: "見える",
-          targetCategory: "v1",
-			},
-			{
-          ruleId: "conjunctive",
-          sourceTerm: "見える",
-          sourceCategory: "v1",
-          targetTerm: "見えて",
-          targetCategory: "vte",
-			},
-			{
-          ruleId: "aux-iru-contracted",
-          sourceTerm: "見えて",
-          sourceCategory: "vte",
-          targetTerm: "見えてる",
-          targetCategory: "v1contr",
-			},
-			{
-          ruleId: "negative",
-          sourceTerm: "見えてる",
-          sourceCategory: "v1contr",
-          targetTerm: "見えてない",
-          targetCategory: "adj-i",
-			}
-		],
-		[
-			{
-          ruleId: "potential-eru",
-          sourceTerm: "見る",
-          sourceCategory: "v1-s",
-          targetTerm: "見える",
-          targetCategory: "v1",
-			},
-			{
-          ruleId: "conjunctive",
-          sourceTerm: "見える",
-          sourceCategory: "v1",
-          targetTerm: "見えて",
-          targetCategory: "vte",
-			},
-			{
-          ruleId: "aux-iru-contracted",
-          sourceTerm: "見えて",
-          sourceCategory: "vte",
-          targetTerm: "見えてる",
-          targetCategory: "v1contr",
-			},
-			{
-          ruleId: "negative",
-          sourceTerm: "見えてる",
-          sourceCategory: "v1contr",
-          targetTerm: "見えてない",
-          targetCategory: "adj-i",
-			}
-		],
-		[
-			{
-          ruleId: "conjunctive",
-          sourceTerm: "見える",
-          sourceCategory: "v1-s",
-          targetTerm: "見えて",
-          targetCategory: "vte",
-			},
-			{
-          ruleId: "aux-iru-contracted",
-          sourceTerm: "見えて",
-          sourceCategory: "vte",
-          targetTerm: "見えてる",
-          targetCategory: "v1contr",
-			},
-			{
-          ruleId: "negative",
-          sourceTerm: "見えてる",
-          sourceCategory: "v1contr",
-          targetTerm: "見えてない",
-          targetCategory: "adj-i",
-			}
-		],
-		[
-			{
-          ruleId: "aux-iru-contracted",
-          sourceTerm: "見え",
-          sourceCategory: "vte",
-          targetTerm: "見える",
-          targetCategory: "v1contr",
-			},
-			{
-          ruleId: "conjunctive",
-          sourceTerm: "見える",
-          sourceCategory: "v1contr",
-          targetTerm: "見えて",
-          targetCategory: "vte",
-			},
-			{
-          ruleId: "aux-iru-contracted",
-          sourceTerm: "見えて",
-          sourceCategory: "vte",
-          targetTerm: "見えてる",
-          targetCategory: "v1contr",
-			},
-			{
-          ruleId: "negative",
-          sourceTerm: "見えてる",
-          sourceCategory: "v1contr",
-          targetTerm: "見えてない",
-          targetCategory: "adj-i",
-			}
-		],
-		[
-			{
-          ruleId: "imperative",
-          sourceTerm: "見えてないる",
-          sourceCategory: "v1-s",
-          targetTerm: "見えてない",
-          targetCategory: "unc",
-			}
-		],
-		[
-			{
-          ruleId: "imperative",
-          sourceTerm: "見えてなる",
-          sourceCategory: "v5aru",
-          targetTerm: "見えてない",
-          targetCategory: "unc",
-			}
-		]
-	],
-    tags: [],
-},
-  entries: [
-	{
-      type: "section",
-      section: "inflected",
+		"explicitNotName": false,
+		"limit": 10
 	},
-	{
-      senses: [
-			{
-          gloss: [
-					"to be seen",
-					"to be visible",
-					"to be in sight"
-				],
-          examples: [
+	"entries": [
+		{
+			"type": "section",
+			"section": "inflected"
+		},
+		{
+			"headings": [
+				{
+					"furigana": "できる;",
+					"rankAnimeDrama": 77,
+					"rankIchi": 1,
+					"rankNews": 1,
+					"rankNf": 15,
+					"jlpt": 3,
+					"score": 2794,
+					"base": "できる",
+					"reading": "できる"
+				},
+				{
+					"furigana": "出.来.る;で.き.",
+					"rankAnimeDrama": 453,
+					"rankWikipedia": 34,
+					"rankIchi": 1,
+					"rankNews": 1,
+					"rankNf": 15,
+					"score": 594,
+					"base": "出来る",
+					"reading": "できる"
+				},
+				{
+					"furigana": "出.きる;で.",
+					"searchOnlyKanji": true,
+					"base": "出きる",
+					"reading": "できる"
+				},
+				{
+					"furigana": "出.來.る;で.き.",
+					"searchOnlyKanji": true,
+					"nonJouyouKanji": true,
+					"base": "出來る",
+					"reading": "できる"
+				}
+			],
+			"senses": [
+				{
+					"pos": [
+						"v1",
+						"vi"
+					],
+					"gloss": [
+						"to be able to do",
+						"to be possible",
+						"to be permitted (to do)"
+					],
+					"misc": [
+						"uk"
+					],
+					"examples": [
+						{
+							"term": "できない",
+							"ja": "申し訳ないけど長居できないんですよ。",
+							"en": "I'm sorry, I can't stay long."
+						}
+					]
+				},
+				{
+					"pos": [
+						"v1",
+						"vi"
+					],
+					"gloss": [
+						"to be good at",
+						"to do well",
+						"to be proficient (in)",
+						"to be capable"
+					],
+					"misc": [
+						"uk"
+					],
+					"examples": [
+						{
+							"term": "できました",
+							"ja": "「論文できましたか」「いや、残念ですが、まだ書き終えていません」",
+							"en": "\"Is the essay ready?\" \"No, I'm sorry. I haven't finished writing it yet.\""
+						}
+					]
+				},
+				{
+					"pos": [
+						"v1",
+						"vi"
+					],
+					"gloss": [
+						"to come into existence",
+						"to form",
+						"to appear",
+						"to come up (of a matter)",
+						"to be born",
+						"to make (a friend)",
+						"to get (a girlfriend, free time, etc.)"
+					],
+					"misc": [
+						"uk"
+					],
+					"examples": [
+						{
+							"term": "できている",
+							"ja": "あのサッカーボールは本物の革でできている。",
+							"en": "That football is made of genuine leather."
+						}
+					]
+				},
+				{
+					"pos": [
+						"v1",
+						"vi"
+					],
+					"gloss": [
+						"to be made",
+						"to be built",
+						"to be constructed",
+						"to be formed",
+						"to be established",
+						"to be set up"
+					],
+					"misc": [
+						"uk"
+					],
+					"examples": [
+						{
+							"term": "できます",
+							"ja": "トイレお借りできますか。",
+							"en": "May I use your toilet?"
+						}
+					]
+				},
+				{
+					"pos": [
+						"v1",
+						"vi"
+					],
+					"gloss": [
+						"to be finished",
+						"to be completed",
+						"to be done",
+						"to be ready"
+					],
+					"misc": [
+						"uk"
+					]
+				},
+				{
+					"pos": [
+						"v1",
+						"vi"
+					],
+					"gloss": [
+						"to grow (of a crop)",
+						"to be produced"
+					],
+					"misc": [
+						"uk"
+					],
+					"examples": [
+						{
+							"term": "出来る",
+							"ja": "オレンジは暖かい国で出来る。",
+							"en": "Oranges grow in warm countries."
+						}
+					]
+				},
+				{
+					"pos": [
+						"v1",
+						"vi"
+					],
+					"gloss": [
+						"to be mature and well-balanced",
+						"to be of fine character"
+					],
+					"misc": [
+						"uk"
+					]
+				},
+				{
+					"pos": [
+						"v1",
+						"vi"
+					],
+					"gloss": [
+						"to be by nature",
+						"to be born ..."
+					],
+					"misc": [
+						"uk"
+					],
+					"info": [
+						"as できている"
+					]
+				},
+				{
+					"pos": [
+						"v1",
+						"vi"
+					],
+					"gloss": [
+						"to become (sexually) involved (with)",
+						"to become intimate (with)",
+						"to take up (with someone)"
+					],
+					"misc": [
+						"uk",
+						"col"
+					],
+					"info": [
+						"usu. as できている"
+					],
+					"examples": [
+						{
+							"term": "できている",
+							"ja": "あの二人はどうもできているらしい。",
+							"en": "They seem to be in love with each other."
+						}
+					]
+				},
+				{
+					"pos": [
+						"v1",
+						"vi"
+					],
+					"gloss": [
+						"to get pregnant"
+					],
+					"misc": [
+						"uk",
+						"col"
+					]
+				}
+			],
+			"score": 2794,
+			"pitch": [
+				{
+					"text": "でꜛきꜜる"
+				}
+			],
+			"id": "w1340450",
+			"inflections": [
+				[
 					{
-              term: "見えた",
-              ja: "聖霊がある方の上に下って、その上にとどまられるのが見えたなら、その方こそ聖霊によってバプテスマを授ける方である。",
-              en: "The man on whom you see the Spirit come down and remain is he who will baptize with the Holy Spirit.",
+						"ruleId": "negative",
+						"sourceTerm": "できる",
+						"sourceCategory": "v1",
+						"targetTerm": "できない",
+						"targetCategory": "adj-i"
 					}
-				],
-			},
-			{
-          gloss: [
-					"to look",
-					"to seem",
-					"to appear"
-				],
-          examples: [
+				]
+			],
+			"type": "word"
+		},
+		{
+			"headings": [
+				{
+					"furigana": "する;",
+					"rankAnimeDrama": 9,
+					"rankWikipedia": 3,
+					"rankIchi": 1,
+					"jlpt": 5,
+					"score": 2850,
+					"base": "する",
+					"reading": "する"
+				},
+				{
+					"furigana": "為.る;す.",
+					"rareKanji": true,
+					"rankAnimeDrama": 65101,
+					"score": 73,
+					"base": "為る",
+					"reading": "する"
+				}
+			],
+			"senses": [
+				{
+					"pos": [
+						"vs-i"
+					],
+					"gloss": [
+						"to do",
+						"to carry out",
+						"to perform"
+					],
+					"misc": [
+						"uk"
+					],
+					"examples": [
+						{
+							"term": "する",
+							"ja": "「これ以上何も言うことはありません、いいわけをするのはいやですから」と彼は言った。",
+							"en": "He said, \"I will say nothing more, because I hate making excuses.\""
+						}
+					]
+				},
+				{
+					"pos": [
+						"vs-i"
+					],
+					"gloss": [
+						"to cause to become",
+						"to make (into)",
+						"to turn (into)"
+					],
+					"misc": [
+						"uk"
+					],
+					"examples": [
+						{
+							"term": "する",
+							"ja": "それらはあなたを暖かくするのに役立つでしょう。",
+							"en": "They will help you to get warm."
+						}
+					]
+				},
+				{
+					"pos": [
+						"vs-i"
+					],
+					"gloss": [
+						"to serve as",
+						"to act as",
+						"to work as"
+					],
+					"misc": [
+						"uk"
+					],
+					"examples": [
+						{
+							"term": "して",
+							"ja": "頭痛を言い訳にして、彼は早く帰った。",
+							"en": "He used a headache as an excuse for leaving early."
+						}
+					]
+				},
+				{
+					"pos": [
+						"vs-i"
+					],
+					"gloss": [
+						"to wear (clothes, a facial expression, etc.)"
+					],
+					"misc": [
+						"uk"
+					],
+					"examples": [
+						{
+							"term": "する",
+							"ja": "そんな苦虫を噛みつぶしたような顔するなよ。",
+							"en": "Don't make such a sour face."
+						}
+					]
+				},
+				{
+					"pos": [
+						"vs-i"
+					],
+					"gloss": [
+						"to judge as being",
+						"to view as being",
+						"to think of as",
+						"to treat as",
+						"to use as"
+					],
+					"misc": [
+						"uk"
+					],
+					"info": [
+						"as 〜にする,〜とする"
+					]
+				},
+				{
+					"pos": [
+						"vs-i"
+					],
+					"gloss": [
+						"to decide on",
+						"to choose"
+					],
+					"misc": [
+						"uk"
+					],
+					"info": [
+						"as 〜にする"
+					],
+					"examples": [
+						{
+							"term": "し",
+							"ja": "結構です。それにしましょう。",
+							"en": "All right. I'll take it."
+						}
+					]
+				},
+				{
+					"pos": [
+						"vs-i",
+						"vi"
+					],
+					"gloss": [
+						"to be sensed (of a smell, noise, etc.)"
+					],
+					"misc": [
+						"uk"
+					],
+					"info": [
+						"as 〜がする"
+					],
+					"examples": [
+						{
+							"term": "する",
+							"ja": "このスープはいやなにおいがする。腐っているでしょう？",
+							"en": "This soup smells horrible. Do you think it's gone off?"
+						}
+					]
+				},
+				{
+					"pos": [
+						"vs-i",
+						"vi"
+					],
+					"gloss": [
+						"to be (in a state, condition, etc.)"
+					],
+					"misc": [
+						"uk"
+					]
+				},
+				{
+					"pos": [
+						"vs-i",
+						"vi"
+					],
+					"gloss": [
+						"to be worth",
+						"to cost"
+					],
+					"misc": [
+						"uk"
+					]
+				},
+				{
+					"pos": [
+						"vs-i",
+						"vi"
+					],
+					"gloss": [
+						"to pass (of time)",
+						"to elapse"
+					],
+					"misc": [
+						"uk"
+					],
+					"examples": [
+						{
+							"term": "したら",
+							"ja": "彼は三日したら出発する。",
+							"en": "He is leaving in three days."
+						}
+					]
+				},
+				{
+					"pos": [
+						"vs-i",
+						"vt"
+					],
+					"gloss": [
+						"to place, or raise, person A to a post or status B"
+					],
+					"misc": [
+						"uk"
+					],
+					"info": [
+						"as AをBにする"
+					]
+				},
+				{
+					"pos": [
+						"vs-i",
+						"vt"
+					],
+					"gloss": [
+						"to transform A to B",
+						"to make A into B",
+						"to exchange A for B"
+					],
+					"misc": [
+						"uk"
+					],
+					"info": [
+						"as AをBにする"
+					]
+				},
+				{
+					"pos": [
+						"vs-i",
+						"vt"
+					],
+					"gloss": [
+						"to make use of A for B",
+						"to view A as B",
+						"to handle A as if it were B"
+					],
+					"misc": [
+						"uk"
+					],
+					"info": [
+						"as AをBにする"
+					]
+				},
+				{
+					"pos": [
+						"vs-i",
+						"vt"
+					],
+					"gloss": [
+						"to feel A about B"
+					],
+					"misc": [
+						"uk"
+					],
+					"info": [
+						"as AをBにする"
+					]
+				},
+				{
+					"pos": [
+						"suf",
+						"vs-i"
+					],
+					"gloss": [
+						"verbalizing suffix (applies to nouns noted in this dictionary with the part of speech \"vs\")"
+					],
+					"misc": [
+						"uk"
+					]
+				},
+				{
+					"pos": [
+						"aux-v",
+						"vs-i"
+					],
+					"gloss": [
+						"creates a humble verb (after a noun prefixed with \"o\" or \"go\")"
+					],
+					"misc": [
+						"uk"
+					],
+					"xref": [
+						{
+							"base": "お願いします"
+						},
+						{
+							"base": "御",
+							"senseIndex": 1
+						}
+					]
+				},
+				{
+					"pos": [
+						"aux-v",
+						"vs-i"
+					],
+					"gloss": [
+						"to be just about to",
+						"to be just starting to",
+						"to try to",
+						"to attempt to"
+					],
+					"misc": [
+						"uk"
+					],
+					"info": [
+						"as 〜うとする,〜ようとする"
+					],
+					"xref": [
+						{
+							"base": "とする",
+							"senseIndex": 1
+						}
+					]
+				}
+			],
+			"score": 2850,
+			"pitch": [
+				{
+					"text": "すꜛる"
+				}
+			],
+			"id": "w1157170",
+			"inflections": [
+				[
 					{
-              term: "見える",
-              ja: "１１ページの地図はとても奇妙に見える。逆さまにしてみると、見慣れた地図になる。",
-              en: "The map on page 11 looks very strange. Turn it upside down. Then it becomes a familiar map to you.",
+						"ruleId": "potential",
+						"sourceTerm": "する",
+						"sourceCategory": "vs-i",
+						"targetTerm": "できる",
+						"targetCategory": "v1"
+					},
+					{
+						"ruleId": "negative",
+						"sourceTerm": "できる",
+						"sourceCategory": "v1",
+						"targetTerm": "できない",
+						"targetCategory": "adj-i"
 					}
-				],
+				]
+			],
+			"type": "word"
+		},
+		{
+			"type": "section",
+			"section": "kanji"
+		},
+		{
+			"strokeCount": 5,
+			"components": [
+				"丨",
+				"丿",
+				"凵",
+				"屮",
+				"山"
+			],
+			"meanings": [
+				"exit",
+				"leave",
+				"go out",
+				"come out",
+				"put out",
+				"protrude"
+			],
+			"kunyomi": [
+				{
+					"text": "で.る",
+					"commonness": 2
+				},
+				{
+					"text": "～で",
+					"commonness": 2
+				},
+				{
+					"text": "だ.す",
+					"commonness": 2
+				},
+				{
+					"text": "～だ.す",
+					"commonness": 2
+				},
+				{
+					"text": "い.でる"
+				},
+				{
+					"text": "い.だす"
+				}
+			],
+			"onyomi": [
+				{
+					"text": "シュツ",
+					"commonness": 2
+				},
+				{
+					"text": "スイ",
+					"commonness": 2
+				}
+			],
+			"readings": [
+				{
+					"reading": "だ",
+					"score": 2325
+				},
+				{
+					"reading": "で",
+					"score": 2055
+				},
+				{
+					"reading": "しゅつ",
+					"score": 2325
+				},
+				{
+					"reading": "しゅっ",
+					"score": 1485
+				},
+				{
+					"reading": "だし",
+					"score": 195
+				},
+				{
+					"reading": "すい",
+					"score": 35
+				},
+				{
+					"reading": "いだ",
+					"score": 40
+				},
+				{
+					"reading": "い",
+					"score": 140
+				},
+				{
+					"reading": "いで",
+					"score": 45
+				},
+				{
+					"reading": "",
+					"score": 20
+				}
+			],
+			"jouyou": 1,
+			"jlpt": 5,
+			"rankNews": 13,
+			"nanori": [
+				"いず",
+				"いづ",
+				"いで",
+				"じ",
+				"すっ",
+				"すつ",
+				"てん"
+			],
+			"structuralCategory": {
+				"type": "kaii"
 			},
-		],
+			"keiseiPhonetic": [
+				"拙"
+			],
+			"descrSeq": [
+				"⿱",
+				[
+					"屮",
+					[
+						"⿻",
+						"凵",
+						"丿"
+					]
+				],
+				"凵"
+			],
+			"wordCount": 1733,
+			"exampleWords": [
+				{
+					"furigana": "出.す;だ.",
+					"sense": "to take out; to get out",
+					"commonness": 2,
+					"jlpt": 5
+				},
+				{
+					"furigana": "出.口;で.ぐち",
+					"sense": "exit; way out",
+					"commonness": 2,
+					"jlpt": 5
+				},
+				{
+					"furigana": "提.出;てい.しゅつ",
+					"sense": "presentation (of documents); submission (of an application, report, etc.); production (e.g. of evidence); introduction (e.g. of a bill); filing; turning in",
+					"commonness": 2,
+					"jlpt": 3
+				},
+				{
+					"furigana": "出.身;しゅっ.しん",
+					"sense": "one's origin (e.g. city, country, parentage, school)",
+					"commonness": 2,
+					"jlpt": 3
+				},
+				{
+					"furigana": "引.き.出.し;ひ..だ.",
+					"sense": "drawer",
+					"commonness": 2,
+					"jlpt": 4
+				}
+			],
+			"score": 52234,
+			"id": "出",
+			"type": "kanji"
+		},
+		{
+			"strokeCount": 7,
+			"components": [
+				"丨",
+				"二",
+				"亠",
+				"木",
+				"米"
+			],
+			"meanings": [
+				"come",
+				"due",
+				"next",
+				"cause",
+				"become"
+			],
+			"kunyomi": [
+				{
+					"text": "く.る",
+					"commonness": 2
+				},
+				{
+					"text": "きた.る"
+				},
+				{
+					"text": "きた.す"
+				},
+				{
+					"text": "き.たす"
+				},
+				{
+					"text": "き.たる"
+				},
+				{
+					"text": "き",
+					"commonness": 2
+				},
+				{
+					"text": "こ"
+				}
+			],
+			"onyomi": [
+				{
+					"text": "ライ",
+					"commonness": 2
+				},
+				{
+					"text": "タイ",
+					"commonness": 2
+				}
+			],
+			"readings": [
+				{
+					"reading": "らい",
+					"score": 1500
+				},
+				{
+					"reading": "き",
+					"score": 510
+				},
+				{
+					"reading": "く",
+					"score": 200
+				},
+				{
+					"reading": "きた",
+					"score": 65
+				},
+				{
+					"reading": "たい",
+					"score": 5
+				},
+				{
+					"reading": "け",
+					"score": 5
+				},
+				{
+					"reading": "こ",
+					"score": 40
+				},
+				{
+					"reading": "か",
+					"score": 15
+				},
+				{
+					"reading": "ごろ",
+					"score": 10
+				},
+				{
+					"reading": "れー",
+					"score": 10
+				},
+				{
+					"reading": "",
+					"score": 10
+				}
+			],
+			"jouyou": 2,
+			"jlpt": 5,
+			"rankNews": 102,
+			"nanori": [
+				"くり",
+				"くる",
+				"ごろ",
+				"さ"
+			],
+			"structuralCategory": {
+				"type": "shoukei"
+			},
+			"wordCount": 474,
+			"exampleWords": [
+				{
+					"furigana": "来.月;らい.げつ",
+					"sense": "next month",
+					"commonness": 2,
+					"jlpt": 5
+				},
+				{
+					"furigana": "出.来.事;で.き.ごと",
+					"sense": "occurrence; happening; incident; event",
+					"commonness": 2,
+					"jlpt": 3
+				},
+				{
+					"furigana": "来.る;く.",
+					"sense": "to come (spatially or temporally); to approach; to arrive",
+					"commonness": 2,
+					"jlpt": 5
+				},
+				{
+					"furigana": "来.週;らい.しゅう",
+					"sense": "next week",
+					"commonness": 2,
+					"jlpt": 5
+				},
+				{
+					"furigana": "来.年;らい.ねん",
+					"sense": "next year",
+					"commonness": 2,
+					"jlpt": 5
+				}
+			],
+			"score": 50934,
+			"id": "来",
+			"type": "kanji"
+		},
+		{
+			"type": "section",
+			"section": "prefix"
+		},
+		{
+			"headings": [
+				{
+					"furigana": "できない.相.談;.そう.だん",
+					"rankAnimeDrama": 39682,
+					"score": 94,
+					"base": "できない相談",
+					"reading": "できないそうだん"
+				},
+				{
+					"furigana": "出.来.ない.相.談;で.き..そう.だん",
+					"rankAnimeDrama": 79499,
+					"score": 51,
+					"base": "出来ない相談",
+					"reading": "できないそうだん"
+				}
+			],
+			"senses": [
+				{
+					"pos": [
+						"exp",
+						"n"
+					],
+					"gloss": [
+						"impossible proposition",
+						"unreasonable proposal",
+						"tall order"
+					],
+					"examples": [
+						{
+							"term": "出来ない相談",
+							"ja": "政府に方針を変えさせるのは出来ない相談だ。",
+							"en": "It's like pulling teeth to ask the government to change their policy."
+						}
+					]
+				}
+			],
+			"score": 94,
+			"id": "w2232290",
+			"type": "word"
+		},
+		{
+			"type": "section",
+			"section": "end"
+		}
 	]
 }
