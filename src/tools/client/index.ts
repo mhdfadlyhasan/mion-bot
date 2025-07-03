@@ -1,7 +1,4 @@
 import { ChannelType, Client as DiscordClient, Collection, Events, GatewayIntentBits, type Channel } from 'discord.js'
-import helloCommand from '../../commands/hello/hello.ts'
-import getTimeCommand from '../../commands/get-time/get_time.ts'
-import livestreamCommand from '../../commands/livestream-tracker'
 import livestreamerSearch from '../../commands/livestreamer-search'
 import jishoSearch from '../../commands/jisho-search'
 
@@ -39,9 +36,6 @@ chatClient.once(Events.ShardDisconnect, disconnectClient => {
 })
 
 chatClient.commands = new Collection()
-chatClient.commands.set(helloCommand.data.name, helloCommand)
-chatClient.commands.set(getTimeCommand.data.name, getTimeCommand)
-chatClient.commands.set(livestreamCommand.data.name, livestreamCommand)
 chatClient.commands.set(livestreamerSearch.data.name, livestreamerSearch)
 chatClient.commands.set(jishoSearch.data.name, jishoSearch)
 
