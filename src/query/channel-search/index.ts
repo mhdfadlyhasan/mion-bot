@@ -37,10 +37,7 @@ export default async function searchStream(name: string): Promise<string> {
 			return ('No youtuber found. ' + name)
 		}
 		const [upcomingStream, message] = await getYoutuberUpcomingVideo(youtuber.channelID)
-		if (message != '') {
-			return message
-		}
-		if (upcomingStream == null) {
+		if (message != '' || upcomingStream == null) {
 			return message
 		}
 
