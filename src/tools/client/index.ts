@@ -1,6 +1,7 @@
 import { ChannelType, Client as DiscordClient, Collection, Events, GatewayIntentBits, type Channel } from 'discord.js'
 import livestreamerSearch from '../../commands/livestreamer-search'
 import jishoSearch from '../../commands/jisho-search'
+import newStreamer from '../../commands/add-channel/index.ts'
 
 
 import { redisGetAllKey } from '../redis.ts'
@@ -38,7 +39,7 @@ chatClient.once(Events.ShardDisconnect, disconnectClient => {
 chatClient.commands = new Collection()
 chatClient.commands.set(livestreamerSearch.data.name, livestreamerSearch)
 chatClient.commands.set(jishoSearch.data.name, jishoSearch)
-
+chatClient.commands.set(newStreamer.data.name, newStreamer)
 
 chatClient.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return

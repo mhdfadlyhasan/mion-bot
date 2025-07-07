@@ -30,6 +30,9 @@ export async function redisGetAllKey(): Promise<string[]> {
 	return await redisClient.keys('*')
 }
 
+export async function redisGetKey(input: string): Promise<string[]> {
+	return await redisClient.keys(input)
+}
 export default {
 	RedisClient: redisClient,
 }
