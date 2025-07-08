@@ -1,7 +1,7 @@
-import { ChannelType, Client as DiscordClient, Collection, Events, GatewayIntentBits, type Channel } from 'discord.js'
+import { ChannelType, Client as DiscordClient, Collection, Events, GatewayIntentBits, type Channel, MessageType } from 'discord.js'
 import livestreamerSearch from '../../commands/livestreamer-search'
 import jishoSearch from '../../commands/jisho-search'
-import newStreamer from '../../commands/add-channel/index.ts'
+import addChannel from '../../commands/add-channel/index.ts'
 
 
 import { redisGetAllKey } from '../redis.ts'
@@ -22,14 +22,14 @@ declare module 'discord.js' {
 	}
 }
 
-const chatClient = await new DiscordClient({ intents: [GatewayIntentBits.Guilds] })
+const chatClient = await new DiscordClient({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] })
 chatClient.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`)
 	channel = chatClient.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
-	const names = await redisGetAllKey()
-	for (const name of names) {
-		console.log(await searchStream(name))
-	}
+	// const names = await redisGetAllKey()
+	// for (const name of names) {
+	// 	console.log(await searchStream(name))
+	// }
 })
 
 chatClient.once(Events.ShardDisconnect, disconnectClient => {
@@ -39,7 +39,23 @@ chatClient.once(Events.ShardDisconnect, disconnectClient => {
 chatClient.commands = new Collection()
 chatClient.commands.set(livestreamerSearch.data.name, livestreamerSearch)
 chatClient.commands.set(jishoSearch.data.name, jishoSearch)
-chatClient.commands.set(newStreamer.data.name, newStreamer)
+chatClient.commands.set(addChannel.data.name, addChannel)
+
+
+chatClient.on(Events.MessageCreate, async interaction => {
+	if (interaction.content.includes("@here") || interaction.content.includes("@everyone")) return
+	if (interaction.mentions.has(process.env.CLIENT_ID!)) {
+		if (interaction.type == MessageType.Reply) {
+			const repliedToMessage = await interaction.fetchReference()
+			interaction.channel.send('i think you want me to dechipher this: ' + repliedToMessage.content)
+		} else {
+			interaction.channel.send('you called?')
+		}
+
+		console.log(interaction)
+	}
+})
+
 
 chatClient.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return
