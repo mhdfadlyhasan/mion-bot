@@ -43,16 +43,16 @@ chatClient.commands.set(addChannel.data.name, addChannel)
 
 
 chatClient.on(Events.MessageCreate, async interaction => {
-	if (interaction.content.includes("@here") || interaction.content.includes("@everyone")) return
-	if (interaction.mentions.has(process.env.CLIENT_ID!)) {
+	if (interaction.mentions.everyone) {
+		return false
+	}
+	else if (interaction.mentions.has(process.env.CLIENT_ID!)) {
 		if (interaction.type == MessageType.Reply) {
 			const repliedToMessage = await interaction.fetchReference()
 			interaction.channel.send('i think you want me to dechipher this: ' + repliedToMessage.content)
 		} else {
 			interaction.channel.send('you called?')
 		}
-
-		console.log(interaction)
 	}
 })
 
