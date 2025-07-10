@@ -4,8 +4,8 @@ import jishoSearch from '../../commands/jisho-search'
 import addChannel from '../../commands/add-channel/index.ts'
 
 
-import { redisGetAllKey } from '../redis.ts'
-import searchStream from '../../query/channel-search/index.ts'
+import { containsJapanese } from '../../lib/contain_japanese.ts'
+import { mentionJisho } from '../../domain/mention-jisho/index.ts'
 let channel: Channel | undefined
 const token = process.env.DISCORD_API_KEY!
 
@@ -22,7 +22,7 @@ declare module 'discord.js' {
 	}
 }
 
-const chatClient = await new DiscordClient({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] })
+const chatClient = await new DiscordClient({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] })
 chatClient.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`)
 	channel = chatClient.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
@@ -43,16 +43,8 @@ chatClient.commands.set(addChannel.data.name, addChannel)
 
 
 chatClient.on(Events.MessageCreate, async interaction => {
-	if (interaction.mentions.everyone) {
-		return false
-	}
-	else if (interaction.mentions.has(process.env.CLIENT_ID!)) {
-		if (interaction.type == MessageType.Reply) {
-			const repliedToMessage = await interaction.fetchReference()
-			interaction.channel.send('i think you want me to dechipher this: ' + repliedToMessage.content)
-		} else {
-			interaction.channel.send('you called?')
-		}
+	if (interaction.mentions.has(process.env.CLIENT_ID!)) {
+		mentionJisho(interaction)
 	}
 })
 
