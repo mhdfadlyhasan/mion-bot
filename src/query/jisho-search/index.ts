@@ -88,7 +88,11 @@ export default async function jishoSearch(input: string): Promise<string> {
 			const jsonResponse = await searchJisho(word)
 			const jishoEntry = jsonResponse.entries?.[1] as Entry
 			// if (!jishoEntry?.senses?.[0]) continue
-			const entry = `**${token.surface}**\nReading: [**${jsonResponse.query.strHiragana}**], Meaning: ${jishoEntry.senses![0]!.gloss[0]}\n`
+			if (!jishoEntry || !jishoEntry.senses || !jishoEntry.senses[0]) {
+				result += "Notfound entry: " + word + '\n'
+				continue
+			}
+			const entry = `**${token.surface}**\nReading: [**${jsonResponse.query.strHiragana}**], Meaning: ${jishoEntry.senses[0].gloss[0]}\n`
 			result += entry
 		}
 		return result
