@@ -14,7 +14,7 @@ export async function mentionJisho(interaction: OmitPartialGroupDMChannel<Messag
 		const cleaned = message.replace(/[^\u3040-\u30FF\u4E00-\u9FFF]/g, '')
 		const deferReply = await interaction.channel.send("fetching! please wait")
 		const result = await jishoSearch(cleaned)
-		deferReply.edit(result)
+		deferReply.edit(result.join(''))
 	} else {
 		interaction.reply('no japanese detected!')
 	}

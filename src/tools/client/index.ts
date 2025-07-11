@@ -6,6 +6,7 @@ import addChannel from '../../commands/add-channel/index.ts'
 
 import { containsJapanese } from '../../lib/contain_japanese.ts'
 import { mentionJisho } from '../../domain/mention-jisho/index.ts'
+import { sendTextWithButton } from '../../lib/text_button.ts'
 let channel: Channel | undefined
 const token = process.env.DISCORD_API_KEY!
 
@@ -26,6 +27,8 @@ const chatClient = await new DiscordClient({ intents: [GatewayIntentBits.Guilds,
 chatClient.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`)
 	channel = chatClient.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
+
+
 	// const names = await redisGetAllKey()
 	// for (const name of names) {
 	// 	console.log(await searchStream(name))
@@ -59,6 +62,7 @@ chatClient.on(Events.InteractionCreate, async interaction => {
 		return
 	}
 
+	// sendTextWithButton(interaction)
 	try {
 		await command.execute(interaction)
 	} catch (error) {

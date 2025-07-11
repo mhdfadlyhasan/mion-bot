@@ -68,8 +68,9 @@ function mergeTokens(tokens: Awaited<ReturnType<typeof tokenize>>) {
 	return merged
 }
 
-export default async function jishoSearch(input: string): Promise<string> {
+export default async function jishoSearch(input: string): Promise<string[]> {
 	const symbolsToRemove = [' ', ',', '、', '　']
+	let result: string[] = []
 	const cleaned = input
 		.split('')
 		.map(char => symbolsToRemove.includes(char) ? '' : char)
@@ -78,7 +79,6 @@ export default async function jishoSearch(input: string): Promise<string> {
 	const wordList = await splitJapanese(cleaned)
 	console.log(wordList)
 	try {
-		let result: string = ''
 		if (wordList === undefined) {
 			return result
 		}
@@ -89,16 +89,16 @@ export default async function jishoSearch(input: string): Promise<string> {
 			const jishoEntry = jsonResponse.entries?.[1] as Entry
 			// if (!jishoEntry?.senses?.[0]) continue
 			if (!jishoEntry || !jishoEntry.senses || !jishoEntry.senses[0]) {
-				result += "Notfound entry: " + word + '\n'
+				result.push(`Notfound entry: ${word}`)
 				continue
 			}
-			const entry = `**${token.surface}**\nReading: [**${jsonResponse.query.strHiragana}**], Meaning: ${jishoEntry.senses[0].gloss[0]}\n`
-			result += entry
+			const entry = `**${token.surface}**\nReading: [**${jsonResponse.query.strHiragana}**], Meaning: ${jishoEntry.senses[0].gloss[0]}`
+			result.push(entry)
 		}
 		return result
 	} catch (error) {
 		console.error('Error fetching jisho info:', error)
-		return 'Failed to fetch jisho info. ' + error
+		return ['Failed to fetch jisho info. ' + error]
 	}
 }
 
