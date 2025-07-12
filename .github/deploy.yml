@@ -1,0 +1,12 @@
+name: Deploy Mion to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    
