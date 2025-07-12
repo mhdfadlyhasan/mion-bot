@@ -26,5 +26,3 @@ jobs:
           bun install
           pm2 reload mion-bot
         EOF
-
-
