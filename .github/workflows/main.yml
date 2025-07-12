@@ -20,7 +20,7 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: bun install and build
       run: |
-        ssh -i ~/.ssh/id_ed25519  ${{secrets.LOGIN}} << 'EOF'
+        ssh -o StrictHostKeyChecking=no  ${{secrets.LOGIN}} << 'EOF'
           cd ~/mion-bot
           git pull origin main
           bun install
