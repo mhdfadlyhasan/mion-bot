@@ -25,3 +25,6 @@ jobs:
           bun install
           pm2 reload mion-bot
         EOF
+
+
+        ssh-keygen -t ed25519 -C "git@github.com:mhdfadlyhasan/mion-bot.git"
