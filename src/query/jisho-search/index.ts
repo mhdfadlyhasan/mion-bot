@@ -92,7 +92,8 @@ export default async function jishoSearch(input: string): Promise<string[]> {
 				result.push(`Notfound entry: ${word}`)
 				continue
 			}
-			const entry = `**${token.surface}**\nReading: [**${jsonResponse.query.strHiragana}**], Meaning: ${jishoEntry.senses[0].gloss[0]}`
+			console.log(jsonResponse.query)
+			const entry = `**${token.surface}**\nReading: [**${token.reading}**], Meaning: ${jishoEntry.senses[0].gloss[0]}`
 			result.push(entry)
 		}
 		return result

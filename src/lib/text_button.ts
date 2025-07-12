@@ -1,13 +1,6 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, type ChatInputCommandInteraction } from "discord.js"
 
-export async function sendTextWithButton(interaction: ChatInputCommandInteraction) {
-	const strings = [
-		'1',
-		'2',
-		'3',
-		'4',
-		'5',
-	]
+export async function sendTextWithButton(interaction: ChatInputCommandInteraction, messageList: string[]) {
 	const next = new ButtonBuilder()
 		.setCustomId('next')
 		.setLabel('next')
@@ -20,8 +13,8 @@ export async function sendTextWithButton(interaction: ChatInputCommandInteractio
 
 	let i = 0
 	const row = new ActionRowBuilder<ButtonBuilder>().addComponents(back, next)
-	const message = await interaction.reply({
-		content: strings[i],
+	const message = await interaction.editReply({
+		content: messageList[i],
 		components: [row],
 	})
 
@@ -31,13 +24,13 @@ export async function sendTextWithButton(interaction: ChatInputCommandInteractio
 	})
 	collector.on('collect', async btn => {
 		if (btn.customId === 'next') {
-			i = (i + 1) % strings.length // wrap around
+			i = (i + 1) % messageList.length // wrap around
 		} else if (btn.customId === 'back') {
-			i = (i - 1 + strings.length) % strings.length // wrap around backwards
+			i = (i - 1 + messageList.length) % messageList.length // wrap around backwards
 		}
 
 		await btn.update({
-			content: strings[i],
+			content: messageList[i],
 			components: [row],
 		})
 	})

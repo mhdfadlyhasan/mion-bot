@@ -1,5 +1,6 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
 import jishoSearch from '../../query/jisho-search'
+import { sendTextWithButton } from '../../lib/text_button'
 
 export default {
 	data: new SlashCommandBuilder()
@@ -15,7 +16,7 @@ export default {
 		await interaction.deferReply()
 		const message = await jishoSearch(word)
 		if (message !== undefined) {
-			await interaction.editReply(word + '\n' + message)
+			sendTextWithButton(interaction, message)
 		}
 	},
 }
