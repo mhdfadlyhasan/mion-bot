@@ -1,0 +1,28 @@
+name: Deploy Mion to VPS
+on:
+  push:
+    branches:
+      - main
+
+          
+jobs:
+  deploy:
+    name: deploy to prod
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node_version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node_version }}
+    
+    - name: bun install and build
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{secret.connection}} << 'EOF'
+          cd ~/mion-bot
+          git pull origin main
+          bun install
+          pm2 reload mion-bot
+        EOF
+
+
