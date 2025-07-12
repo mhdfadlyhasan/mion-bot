@@ -18,7 +18,7 @@ jobs:
     
     - name: bun install and build
       run: |
-        ssh -o StrictHostKeyChecking=no ${{secret.LOGIN}} << 'EOF'
+        ssh -o StrictHostKeyChecking=no ${{secrets.LOGIN}} << 'EOF'
           cd ~/mion-bot
           git pull origin main
           bun install
