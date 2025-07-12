@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     name: deploy to prod
-    runs-on: Ubuntu 20.04.6 LTS
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node_version }}
