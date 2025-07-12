@@ -20,11 +20,10 @@ jobs:
     - name: bun install and build
       run: |
         ssh -o StrictHostKeyChecking=no  ${{secrets.LOGIN}} << 'EOF'
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_ed25519
           cd ~/mion-bot
           git pull origin main
           bun install
           pm2 reload mion-bot
         EOF
-
-
-        ssh-keygen -t ed25519 -C "git@github.com:mhdfadlyhasan/mion-bot.git"
