@@ -15,7 +15,9 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node_version }}
-    
+    - uses: webfactory/ssh-agent@v0.9.0
+      with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     - name: bun install and build
       run: |
         ssh -i ~/.ssh/id_ed25519  ${{secrets.LOGIN}} << 'EOF'
