@@ -3,18 +3,21 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, type ChatI
 export async function sendTextWithButton(interaction: ChatInputCommandInteraction, messageList: string[]) {
 	const next = new ButtonBuilder()
 		.setCustomId('next')
-		.setLabel('next')
+		.setLabel('Next')
 		.setStyle(ButtonStyle.Primary)
 
 	const back = new ButtonBuilder()
 		.setCustomId('back')
-		.setLabel('back')
-		.setStyle(ButtonStyle.Secondary)
+		.setLabel('Back')
+		.setStyle(ButtonStyle.Danger)
+		.setDisabled(true)
 
-	let i = 0
-	const row = new ActionRowBuilder<ButtonBuilder>().addComponents(back, next)
+	let start = 0
+	let batchLength = 5
+	let end = start + batchLength
+	let row = new ActionRowBuilder<ButtonBuilder>().addComponents(back, next)
 	const message = await interaction.editReply({
-		content: messageList[i],
+		content: messageList.slice(start, end).join('\n'),
 		components: [row],
 	})
 
@@ -24,13 +27,27 @@ export async function sendTextWithButton(interaction: ChatInputCommandInteractio
 	})
 	collector.on('collect', async btn => {
 		if (btn.customId === 'next') {
-			i = (i + 1) % messageList.length // wrap around
+			start = start + batchLength
 		} else if (btn.customId === 'back') {
-			i = (i - 1 + messageList.length) % messageList.length // wrap around backwards
+			start = start - batchLength  // wrap around backwards
+		}
+		if (start < 0 || start > messageList.length) start = 0
+		end = start + batchLength
+
+		if (end > messageList.length) {
+			end = messageList.length
+		}
+
+		if (start > 0 && back.data.disabled) {
+			back.setDisabled(false)
+			row = new ActionRowBuilder<ButtonBuilder>().addComponents(back, next)
+		} else if (start == 0 && !back.data.disabled) {
+			back.setDisabled(true)
+			row = new ActionRowBuilder<ButtonBuilder>().addComponents(back, next)
 		}
 
 		await btn.update({
-			content: messageList[i],
+			content: messageList.slice(start, end).join('\n'),
 			components: [row],
 		})
 	})

@@ -77,7 +77,6 @@ export default async function jishoSearch(input: string): Promise<string[]> {
 		.join('')
 
 	const wordList = await splitJapanese(cleaned)
-	console.log(wordList)
 	try {
 		if (wordList === undefined) {
 			return result
@@ -92,7 +91,6 @@ export default async function jishoSearch(input: string): Promise<string[]> {
 				result.push(`Notfound entry: ${word}`)
 				continue
 			}
-			console.log(jsonResponse.query)
 			const entry = `**${token.surface}**\nReading: [**${token.reading}**], Meaning: ${jishoEntry.senses[0].gloss[0]}`
 			result.push(entry)
 		}
