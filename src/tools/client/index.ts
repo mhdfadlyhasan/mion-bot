@@ -46,7 +46,7 @@ chatClient.commands.set(addChannel.data.name, addChannel)
 
 
 chatClient.on(Events.MessageCreate, async interaction => {
-	if (interaction.mentions.has(process.env.CLIENT_ID!)) {
+	if (!interaction.mentions.everyone && interaction.mentions.has(process.env.CLIENT_ID!)) {
 		mentionJisho(interaction)
 	}
 })
@@ -56,7 +56,6 @@ chatClient.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return
 
 	const command = chatClient.commands.get(interaction.commandName)
-
 	if (!command) {
 		console.error(`No command found for ${interaction.commandName}`)
 		return
