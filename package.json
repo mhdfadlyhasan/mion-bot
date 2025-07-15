@@ -4,7 +4,12 @@
     "discord.js": "^14.19.3",
     "kuromojin": "^3.0.1",
     "pm2": "^6.0.8",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "redis": "^5.5.6",
+    "semantic-ui-react": "^2.1.5",
+    "server": "react-dom/server",
+    "typescript-coverage-report": "^1.1.1",
     "youtubei.js": "^14.0.0"
   },
   "name": "mion-bot",
