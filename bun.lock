@@ -5,6 +5,7 @@
       "dependencies": {
         "cron": "^4.3.1",
         "discord.js": "^14.19.3",
+        "kanji": "^0.19.3",
         "kuromojin": "^3.0.1",
         "pm2": "^6.0.8",
         "react": "^19.1.0",
@@ -389,6 +390,8 @@
     "json-stable-stringify-without-jsonify": ["json-stable-stringify-without-jsonify@1.0.1", "", {}, "sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw=="],
 
     "json-stringify-safe": ["json-stringify-safe@5.0.1", "", {}, "sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA=="],
+
+    "kanji": ["kanji@0.19.3", "", { "bin": { "kanji-tree": "lib/bin/kanji-tree.js" } }, "sha512-WpO3DP8tAobRLciyjx7C+JozYnP/vvqKc5u0MYk7PLubr84TYJsrp5o/PwT9TKoG2yGG532tXjauFdDgzisUXw=="],
 
     "keyboard-key": ["keyboard-key@1.1.0", "", {}, "sha512-qkBzPTi3rlAKvX7k0/ub44sqOfXeLc/jcnGGmj5c7BJpU8eDrEVPyhCvNYAaoubbsLm9uGWwQJO1ytQK1a9/dQ=="],
 
