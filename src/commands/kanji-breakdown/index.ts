@@ -1,7 +1,6 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
-import jishoSearch from '../../query/jisho-search'
-import { sendTextWithButton } from '../../lib/text_button'
-import { kanjiTree } from 'kanji'
+import { breakDownKanji } from '../../lib/kanji_tree'
+import { textMultiChoice } from '../../lib/text_multichoice'
 
 export default {
 	data: new SlashCommandBuilder()
@@ -13,6 +12,9 @@ export default {
 				.setRequired(true),
 		),
 	async execute(interaction: ChatInputCommandInteraction) {
-
+		const name = interaction.options.getString('kanji', true)
+		const result = await breakDownKanji(name)
+		const buttonList = textMultiChoice(result.element, result.child)
+		interaction.reply(buttonList)
 	},
 }

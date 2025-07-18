@@ -2,12 +2,9 @@ import { ChannelType, Client as DiscordClient, Collection, Events, GatewayIntent
 import livestreamerSearch from '../../commands/livestreamer-search'
 import jishoSearch from '../../commands/jisho-search'
 import addChannel from '../../commands/add-channel/index.ts'
+import kanjiBreakdown from '../../commands/kanji-breakdown/index.ts'
 
-
-import { containsJapanese } from '../../lib/contain_japanese.ts'
 import { mentionJisho } from '../../domain/mention-jisho/index.ts'
-import { sendTextWithButton } from '../../lib/text_button.ts'
-import { breakDownKanji } from '../../lib/kanji_tree.ts'
 let channel: Channel | undefined
 const token = process.env.DISCORD_API_KEY!
 
@@ -28,7 +25,6 @@ const chatClient = await new DiscordClient({ intents: [GatewayIntentBits.Guilds,
 chatClient.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`)
 	channel = chatClient.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
-	await breakDownKanji('働')
 
 	// const names = await redisGetAllKey()
 	// for (const name of names) {
@@ -44,6 +40,7 @@ chatClient.commands = new Collection()
 chatClient.commands.set(livestreamerSearch.data.name, livestreamerSearch)
 chatClient.commands.set(jishoSearch.data.name, jishoSearch)
 chatClient.commands.set(addChannel.data.name, addChannel)
+chatClient.commands.set(kanjiBreakdown.data.name, kanjiBreakdown)
 
 
 chatClient.on(Events.MessageCreate, async interaction => {

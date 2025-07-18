@@ -1,11 +1,10 @@
 import { kanjiTree } from "kanji"
+import { KanjiTree } from "../data_type/kanji_tree"
 
-export async function breakDownKanji(word: string) {
-	const result = kanjiTree(word)
-	console.log(JSON.stringify(result))
-	// await interaction.deferReply()
-	// const message = await jishoSearch(word)
-	// if (message !== undefined) {
-	// 	// sendTextWithButton(interaction, result)
-	// }
+export async function breakDownKanji(word: string): Promise<KanjiTree> {
+	const rawTree = kanjiTree(word)
+	const parsedTree = KanjiTree.fromRaw(rawTree)
+
+	//todo populate jisho
+	return parsedTree
 }
