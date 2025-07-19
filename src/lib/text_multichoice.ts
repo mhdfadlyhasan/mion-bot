@@ -7,16 +7,25 @@ export function textMultiChoice(content: string, optionList: string[]): {
 	const row = new ActionRowBuilder<ButtonBuilder>()
 	if (optionList.length === 0) {
 		console.log("huh")
-
+		const button = new ButtonBuilder()
+			.setCustomId('0')
+			.setLabel('No child')
+			.setDisabled(true)
+			.setStyle(ButtonStyle.Primary)
+		row.addComponents(button)
+		return ({
+			content: content,
+			components: [row],
+		})
 	}
 	else {
-		for (const option of optionList) {
-			if (option === undefined) {
+		for (const idx in optionList) {
+			if (optionList[idx] === undefined) {
 				continue
 			}
 			const button = new ButtonBuilder()
-				.setCustomId(option)
-				.setLabel(option)
+				.setCustomId(idx)
+				.setLabel(optionList[idx])
 				.setStyle(ButtonStyle.Primary)
 			row.addComponents(button)
 		}
