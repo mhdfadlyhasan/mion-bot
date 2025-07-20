@@ -1,9 +1,10 @@
 import type { Youtuber } from '../../data_type/youtuber.ts'
 import { redisGetWildCard, redisSet } from '../../tools/redis.ts/index.ts'
 import { setNotification } from '../../lib/notification.ts'
-import { getYoutuberUpcomingVideo } from '../youtuber-upcoming-video-query/index.ts'
+import { getYoutuberUpcomingVideo, getYoutuberUpcomingVideoV2 } from '../youtuber-upcoming-video-query/index.ts'
 import { searchYoutuberByName } from '../search-youtuber/index.ts'
 import { getVideoDetail } from '../video-detail/index.ts'
+import type { LivestreamItem } from '../../data_type/livestream.ts'
 
 export default async function searchStream(name: string): Promise<string> {
 	const now = new Date()
@@ -36,11 +37,17 @@ export default async function searchStream(name: string): Promise<string> {
 		if (youtuber === null || youtuber.channelID === undefined) {
 			return ('No youtuber found. ' + name)
 		}
-		const [upcomingStream, message] = await getYoutuberUpcomingVideo(youtuber.channelID)
+		let upcomingStream: LivestreamItem | null
+		let message: string
+		if (process.env.GET_UPCOMING_V2) {
+			[upcomingStream, message] = await getYoutuberUpcomingVideo(youtuber.channelID)
+
+		} else {
+			[upcomingStream, message] = await getYoutuberUpcomingVideoV2(youtuber.channelID)
+		}
 		if (message != '' || upcomingStream == null) {
 			return message
 		}
-
 		const [videoInfo, latestStreamTime] = await getVideoDetail([upcomingStream.id.videoId])
 		if (videoInfo === null || typeof videoInfo === 'string') {
 			return 'Error' + videoInfo
