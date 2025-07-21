@@ -1,7 +1,8 @@
-import type { Livestream } from '../../data_type/livestream'
+import type { Livestream, LivestreamItem } from '../../data_type/livestream'
 
 export async function getVideoDetail(idList: string[]): Promise<[string | Livestream | null, string]> {
 	try {
+		let startTime: string
 		const link = `https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${idList.join(',')}&key=${process.env.YOUTUBE_API_KEY}`
 		const response = await fetch(link)
 		if (!response.ok) {
@@ -11,7 +12,6 @@ export async function getVideoDetail(idList: string[]): Promise<[string | Livest
 		if (livestream.items.length === 0) {
 			return [null, '']
 		}
-		let startTime: string
 		if (livestream.items[0]?.liveStreamingDetails.scheduledStartTime == null) {
 			startTime = 'unknown'
 		} else {
@@ -21,5 +21,20 @@ export async function getVideoDetail(idList: string[]): Promise<[string | Livest
 	} catch (error) {
 		console.error('Error fetching livestream info:', error)
 		return [error as string, '']
+	}
+}
+
+export async function getVideoDetailList(idList: string[]): Promise<[LivestreamItem[] | null]> {
+	try {
+		const link = `https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${idList.join(',')}&key=${process.env.YOUTUBE_API_KEY}`
+		const response = await fetch(link)
+		if (!response.ok) {
+			throw new Error(`Network response was not ok. Status: ${response.status}`)
+		}
+		const livestream = await response.json() as Livestream
+		return [livestream.items]
+	} catch (error: any) {
+		console.error('Error fetching livestream info:', error)
+		return [null]
 	}
 }

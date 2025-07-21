@@ -13,8 +13,8 @@ export async function sendTextWithButton(interaction: ChatInputCommandInteractio
 		.setDisabled(true)
 
 	let start = 0
-	let batchLength = 5
-	let end = start + batchLength
+	let BATCH_LENGTH = 5
+	let end = start + BATCH_LENGTH
 	let row = new ActionRowBuilder<ButtonBuilder>().addComponents(back, next)
 	const message = await interaction.editReply({
 		content: messageList.slice(start, end).join('\n'),
@@ -27,12 +27,12 @@ export async function sendTextWithButton(interaction: ChatInputCommandInteractio
 	})
 	collector.on('collect', async btn => {
 		if (btn.customId === 'next') {
-			start = start + batchLength
+			start = start + BATCH_LENGTH
 		} else if (btn.customId === 'back') {
-			start = start - batchLength  // wrap around backwards
+			start = start - BATCH_LENGTH  // wrap around backwards
 		}
 		if (start < 0 || start > messageList.length) start = 0
-		end = start + batchLength
+		end = start + BATCH_LENGTH
 
 		if (end > messageList.length) {
 			end = messageList.length
