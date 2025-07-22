@@ -101,7 +101,10 @@ export async function searchStreamList(nameList: string[]): Promise<string | Liv
 				console.log(message)
 				return message
 			}
-			youtuberMap.set(upcomingStream.id.videoId!, youtuber!)
+			if (typeof upcomingStream.id == 'string') {
+				continue
+			}
+			youtuberMap.set(upcomingStream.id.videoId, youtuber!)
 			upcomingStreamIDList.push(upcomingStream.id.videoId)
 		} catch (error) {
 			console.error('Error fetching youtuber info:', error)
@@ -119,8 +122,10 @@ export async function searchStreamList(nameList: string[]): Promise<string | Liv
 		if (videoDetail.liveStreamingDetails == null) {
 			return 'Failed to fetch youtuber info.'
 		}
-		console.log(videoDetail.liveStreamingDetails)
-		const youtuber = youtuberMap.get(videoDetail.id.videoId)!
+		if (typeof videoDetail.id != 'string') {
+			continue
+		}
+		const youtuber = youtuberMap.get(videoDetail.id as unknown as string)!
 		youtuber.latestStreamLink = `https://www.youtube.com/watch?v=${videoDetail.id.videoId}`
 		youtuber.latestStreamTime = videoDetail.liveStreamingDetails?.scheduledStartTime
 		redisSet(youtuber.channelName!, JSON.stringify(youtuber))

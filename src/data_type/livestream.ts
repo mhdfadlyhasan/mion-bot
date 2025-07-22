@@ -1,7 +1,7 @@
 import type { ChannelEntry } from "./channel_feed"
 
 export type LivestreamItem = {
-	id: {
+	id: string | {
 		videoId: string
 	}
 	snippet: {
