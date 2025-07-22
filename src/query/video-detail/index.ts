@@ -24,17 +24,18 @@ export async function getVideoDetail(idList: string[]): Promise<[string | Livest
 	}
 }
 
-export async function getVideoDetailList(idList: string[]): Promise<[LivestreamItem[] | null]> {
+export async function getVideoDetailList(idList: string[]): Promise<Livestream | null> {
 	try {
 		const link = `https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${idList.join(',')}&key=${process.env.YOUTUBE_API_KEY}`
+		console.log(link)
 		const response = await fetch(link)
 		if (!response.ok) {
 			throw new Error(`Network response was not ok. Status: ${response.status}`)
 		}
 		const livestream = await response.json() as Livestream
-		return [livestream.items]
+		return livestream
 	} catch (error: any) {
 		console.error('Error fetching livestream info:', error)
-		return [null]
+		return null
 	}
 }

@@ -69,7 +69,7 @@ export async function searchStreamList(nameList: string[]): Promise<string | Liv
 
 	let upcomingStreamIDList: string[] = []
 
-	for (let name in nameList) {
+	for (let name of nameList) {
 		try {
 			let youtuber: Youtuber
 			const youtuberInCache = await redisGetWildCard(name.toLowerCase())
@@ -79,16 +79,17 @@ export async function searchStreamList(nameList: string[]): Promise<string | Liv
 					name = youtuber.channelName
 					isFullNameGet = true
 				}
+
 				const latestStreamTime = new Date(youtuber.latestStreamTime)
 				if (now < latestStreamTime) {
-					// console.info('using data from redis')
-					// processOutput(youtuber)
-					// continue
+					console.info('using data from redis')
+					processOutput(youtuber)
+					continue
 				}
 			}
 			if (!isFullNameGet) {
 				youtuber = await searchYoutuberByName(name)
-				youtuberMap.set(youtuber.channelName!, youtuber)
+
 				if (youtuber === null || youtuber.channelID === undefined) {
 					return ('No youtuber found. ' + name)
 				}
@@ -100,6 +101,7 @@ export async function searchStreamList(nameList: string[]): Promise<string | Liv
 				console.log(message)
 				return message
 			}
+			youtuberMap.set(upcomingStream.id.videoId!, youtuber!)
 			upcomingStreamIDList.push(upcomingStream.id.videoId)
 		} catch (error) {
 			console.error('Error fetching youtuber info:', error)
@@ -108,11 +110,19 @@ export async function searchStreamList(nameList: string[]): Promise<string | Liv
 	}
 
 
-	const [videoInfoList] = await getVideoDetailList(upcomingStreamIDList)
-	for (const video of videoInfoList!) {
-		const youtuber = youtuberMap.get(video.snippet.channelTitle)!
-		youtuber.latestStreamLink = `https://www.youtube.com/watch?v=${video.id.videoId}`
-		youtuber.latestStreamTime = video.liveStreamingDetails?.scheduledStartTime
+	const videoInfoList = await getVideoDetailList(upcomingStreamIDList)
+	console.log("videoInfoList")
+	if (videoInfoList == null) {
+		return ''
+	}
+	for (const videoDetail of videoInfoList.items) {
+		if (videoDetail.liveStreamingDetails == null) {
+			return 'Failed to fetch youtuber info.'
+		}
+		console.log(videoDetail.liveStreamingDetails)
+		const youtuber = youtuberMap.get(videoDetail.id.videoId)!
+		youtuber.latestStreamLink = `https://www.youtube.com/watch?v=${videoDetail.id.videoId}`
+		youtuber.latestStreamTime = videoDetail.liveStreamingDetails?.scheduledStartTime
 		redisSet(youtuber.channelName!, JSON.stringify(youtuber))
 		console.log(processOutput(youtuber))
 	}

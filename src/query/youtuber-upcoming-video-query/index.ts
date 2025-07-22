@@ -58,6 +58,7 @@ export async function getYoutuberUpcomingVideoV2(channelID: string): Promise<[Li
 		xml: string
 	}
 
+	console.log(response.feed.entry)
 
 	const upcomingVideoList: ChannelEntry[] = response.feed.entry.filter(value =>
 		parseInt(value.group?.community?.statistics.views) == 0
