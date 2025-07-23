@@ -25,6 +25,7 @@ export async function getVideoDetail(idList: string[]): Promise<[string | Livest
 }
 
 export async function getVideoDetailList(idList: string[]): Promise<Livestream | null> {
+	if (idList.length == 0) return null
 	try {
 		const link = `https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${idList.join(',')}&key=${process.env.YOUTUBE_API_KEY}`
 		console.log(link)

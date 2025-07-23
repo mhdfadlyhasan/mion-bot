@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction } from 'discord.js'
-import searchStream from '../../query/channel-search'
+import searchStream from '../../query/search-stream'
 
 export default {
 	data: new SlashCommandBuilder()

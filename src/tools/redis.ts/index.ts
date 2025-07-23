@@ -1,4 +1,5 @@
 import { createClient } from 'redis'
+import type { Youtuber } from '../../data_type/youtuber'
 const redisClient = await createClient({
 	url: process.env.REDIS_KEY!,
 })
@@ -33,6 +34,7 @@ export async function redisGetAllKey(): Promise<string[]> {
 export async function redisGetKey(input: string): Promise<string[]> {
 	return await redisClient.keys(input)
 }
+
 export default {
 	RedisClient: redisClient,
 }

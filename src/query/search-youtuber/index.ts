@@ -1,5 +1,6 @@
 import { Innertube } from 'youtubei.js'
 import type { Youtuber } from '../../data_type/youtuber'
+import { redisGetWildCard } from '../../tools/redis.ts'
 
 export async function searchYoutuberByName(input: string): Promise<Youtuber> {
 	const innertube = await Innertube.create({})
@@ -17,4 +18,20 @@ export async function searchYoutuberByName(input: string): Promise<Youtuber> {
 		latestStreamTime: '',
 	}
 	return result
+}
+
+
+export async function FindYoutuberFromCache(name: string): Promise<[Youtuber | null, string]> {
+	const youtuberInCache = await redisGetWildCard(name.toLowerCase())
+	if (youtuberInCache !== null) {
+		const youtuber = JSON.parse(youtuberInCache) as Youtuber
+		if (youtuber.channelName !== undefined) {
+			name = youtuber.channelName
+		}
+		return [youtuber, name]
+
+	} else {
+		console.log('not found ' + name)
+	}
+	return [null, name]
 }
