@@ -20,6 +20,13 @@ export type YoutuberItem = {
 	}
 }
 
+export function hasUpcomingStream(youtuber: Youtuber): boolean {
+	const now = new Date()
+	const latestStreamTime = new Date(youtuber.latestStreamTime)
+	if (youtuber.latestStreamTime == '') return false
+	return now < latestStreamTime
+}
+
 export type Youtuber = {
 	channelID: string | undefined
 	channelName: string | undefined

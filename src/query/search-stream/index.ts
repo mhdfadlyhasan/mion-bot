@@ -1,4 +1,4 @@
-import type { Youtuber } from '../../data_type/youtuber.ts'
+import { type Youtuber } from '../../data_type/youtuber.ts'
 import { redisGetWildCard, redisSet } from '../../tools/redis.ts/index.ts'
 import { setNotification } from '../../lib/notification.ts'
 import { getYoutuberUpcomingVideo, getYoutuberUpcomingVideoV2 } from '../youtuber-upcoming-video-query/index.ts'
@@ -6,14 +6,8 @@ import { searchYoutuberByName } from '../search-youtuber/index.ts'
 import { getVideoDetail } from '../video-detail/index.ts'
 import type { LivestreamItem } from '../../data_type/livestream.ts'
 
-export default async function searchStream(name: string): Promise<string> {
+export default async function searchStream(name: string): Promise<string | LivestreamItem> {
 	const now = new Date()
-	const processOutput = function processOutput(detail: Youtuber): string {
-		const startTime = new Date(detail.latestStreamTime).toLocaleString('en-us', { timeZone: 'Asia/Bangkok' })
-		const delay = new Date(detail.latestStreamTime).getTime() - Date.now()
-		setNotification(detail.channelID as string, 'Its about to start! \n' + detail.latestStreamLink, delay)
-		return ('Live time ' + startTime + '\n' + detail.latestStreamLink)
-	}
 	let isFullNameGet = false
 	let youtuber: Youtuber | null = null
 
@@ -41,18 +35,22 @@ export default async function searchStream(name: string): Promise<string> {
 		let message: string
 		if (process.env.GET_UPCOMING_V2) {
 			[upcomingStream, message] = await getYoutuberUpcomingVideo(youtuber.channelID)
-
 		} else {
 			[upcomingStream, message] = await getYoutuberUpcomingVideoV2(youtuber.channelID)
+			return upcomingStream as LivestreamItem
 		}
 		if (message != '' || upcomingStream == null) {
 			return message
 		}
-		const [videoInfo, latestStreamTime] = await getVideoDetail([upcomingStream.id.videoId])
+		let upcomingStreamID = upcomingStream.id
+		if (typeof upcomingStream.id != 'string') {
+			upcomingStreamID = upcomingStream.id.videoId
+		}
+		const [videoInfo, latestStreamTime] = await getVideoDetail([upcomingStreamID as string])
 		if (videoInfo === null || typeof videoInfo === 'string') {
 			return 'Error' + videoInfo
 		}
-		youtuber.latestStreamLink = `https://www.youtube.com/watch?v=${upcomingStream.id.videoId}`
+		youtuber.latestStreamLink = `https://www.youtube.com/watch?v=${upcomingStreamID}`
 		youtuber.latestStreamTime = latestStreamTime
 		redisSet(youtuber.channelName!, JSON.stringify(youtuber))
 		return processOutput(youtuber)
@@ -60,4 +58,11 @@ export default async function searchStream(name: string): Promise<string> {
 		console.error('Error fetching youtuber info:', error)
 		return 'Failed to fetch youtuber info.' + error
 	}
+}
+
+function processOutput(detail: Youtuber): string {
+	const startTime = new Date(detail.latestStreamTime).toLocaleString('en-us', { timeZone: 'Asia/Bangkok' })
+	const delay = new Date(detail.latestStreamTime).getTime() - Date.now()
+	if (delay > 0) setNotification(detail.channelID as string, 'Its about to start! \n' + detail.latestStreamLink, delay)
+	return ('Live time ' + startTime + '\n' + detail.latestStreamLink)
 }
