@@ -1,5 +1,4 @@
 import { createClient } from 'redis'
-import type { Youtuber } from '../../data_type/youtuber'
 const redisClient = await createClient({
 	url: process.env.REDIS_KEY!,
 })

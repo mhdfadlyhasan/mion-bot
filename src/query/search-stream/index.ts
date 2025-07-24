@@ -1,9 +1,9 @@
-import { hasUpcomingStream, type Youtuber } from '../../data_type/youtuber.ts'
+import { type Youtuber } from '../../data_type/youtuber.ts'
 import { redisGetWildCard, redisSet } from '../../tools/redis.ts/index.ts'
 import { setNotification } from '../../lib/notification.ts'
 import { getYoutuberUpcomingVideo, getYoutuberUpcomingVideoV2 } from '../youtuber-upcoming-video-query/index.ts'
 import { searchYoutuberByName } from '../search-youtuber/index.ts'
-import { getVideoDetail, getVideoDetailList } from '../video-detail/index.ts'
+import { getVideoDetail } from '../video-detail/index.ts'
 import type { LivestreamItem } from '../../data_type/livestream.ts'
 
 export default async function searchStream(name: string): Promise<string | LivestreamItem> {
@@ -42,11 +42,15 @@ export default async function searchStream(name: string): Promise<string | Lives
 		if (message != '' || upcomingStream == null) {
 			return message
 		}
-		const [videoInfo, latestStreamTime] = await getVideoDetail([upcomingStream.id.videoId])
+		let upcomingStreamID = upcomingStream.id
+		if (typeof upcomingStream.id != 'string') {
+			upcomingStreamID = upcomingStream.id.videoId
+		}
+		const [videoInfo, latestStreamTime] = await getVideoDetail([upcomingStreamID as string])
 		if (videoInfo === null || typeof videoInfo === 'string') {
 			return 'Error' + videoInfo
 		}
-		youtuber.latestStreamLink = `https://www.youtube.com/watch?v=${upcomingStream.id.videoId}`
+		youtuber.latestStreamLink = `https://www.youtube.com/watch?v=${upcomingStreamID}`
 		youtuber.latestStreamTime = latestStreamTime
 		redisSet(youtuber.channelName!, JSON.stringify(youtuber))
 		return processOutput(youtuber)
@@ -59,6 +63,6 @@ export default async function searchStream(name: string): Promise<string | Lives
 function processOutput(detail: Youtuber): string {
 	const startTime = new Date(detail.latestStreamTime).toLocaleString('en-us', { timeZone: 'Asia/Bangkok' })
 	const delay = new Date(detail.latestStreamTime).getTime() - Date.now()
-	setNotification(detail.channelID as string, 'Its about to start! \n' + detail.latestStreamLink, delay)
+	if (delay > 0) setNotification(detail.channelID as string, 'Its about to start! \n' + detail.latestStreamLink, delay)
 	return ('Live time ' + startTime + '\n' + detail.latestStreamLink)
 }

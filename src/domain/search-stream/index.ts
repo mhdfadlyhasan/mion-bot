@@ -23,11 +23,10 @@ export async function searchStreamList(nameList: string[]): Promise<string | Liv
 					continue
 				}
 			}
-
 			const [upcomingStream, message] = await getYoutuberUpcomingVideoV2(youtuber!.channelID!)
 			if (message != '' || upcomingStream == null) {
 				console.log(message)
-				return message
+				continue
 			}
 			if (typeof upcomingStream.id == 'string') {
 				continue

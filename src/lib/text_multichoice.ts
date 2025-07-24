@@ -6,7 +6,6 @@ export function textMultiChoice(content: string, optionList: string[]): {
 } {
 	const row = new ActionRowBuilder<ButtonBuilder>()
 	if (optionList.length === 0) {
-		console.log("huh")
 		const button = new ButtonBuilder()
 			.setCustomId('0')
 			.setLabel('No child')

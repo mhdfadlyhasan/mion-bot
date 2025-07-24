@@ -1,4 +1,4 @@
-import type { Livestream, LivestreamItem } from '../../data_type/livestream'
+import type { Livestream } from '../../data_type/livestream'
 
 export async function getVideoDetail(idList: string[]): Promise<[string | Livestream | null, string]> {
 	try {
