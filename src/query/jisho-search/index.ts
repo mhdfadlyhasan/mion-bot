@@ -53,7 +53,26 @@ function mergeTokens(tokens: Awaited<ReturnType<typeof tokenize>>) {
 				pos: t.pos,
 			})
 			i += 2
-		} else if (t) {
+		}
+		// Vっ
+		else if (
+			t &&
+			t1 &&
+			t.surface_form.endsWith('っ') &&
+			t1.pos === '助詞'
+		) {
+			// verb and aux
+			merged.push({
+				surface: t.surface_form + t1.surface_form,
+				reading: t.reading,
+				basicForm: t.basic_form,
+				conjugated_form: t.conjugated_form,
+				word_position: t.word_position,
+				pos: t.pos,
+			})
+			i += 2
+		}
+		else if (t) {
 			merged.push({
 				surface: t.surface_form,
 				reading: t.reading,
