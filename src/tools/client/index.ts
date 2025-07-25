@@ -28,7 +28,7 @@ chatClient.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`)
 	channel = chatClient.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
 	const names = await redisGetAllKey()
-	searchStreamList(names)
+	console.log(searchStreamList(names))
 })
 
 chatClient.once(Events.ShardDisconnect, disconnectClient => {

@@ -1,6 +1,6 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, type ChatInputCommandInteraction } from "discord.js"
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, Message, type ChatInputCommandInteraction, type OmitPartialGroupDMChannel } from "discord.js"
 
-export async function sendTextWithButton(interaction: ChatInputCommandInteraction, messageList: string[]) {
+export async function sendTextWithButton(interaction: ChatInputCommandInteraction | Message<true> | Message<false>, messageList: string[]) {
 	const next = new ButtonBuilder()
 		.setCustomId('next')
 		.setLabel('Next')
@@ -16,14 +16,24 @@ export async function sendTextWithButton(interaction: ChatInputCommandInteractio
 	let BATCH_LENGTH = 5
 	let end = start + BATCH_LENGTH
 	let row = new ActionRowBuilder<ButtonBuilder>().addComponents(back, next)
-	const message = await interaction.editReply({
-		content: messageList.slice(start, end).join('\n'),
-		components: [row],
-	})
+	let message: Message<boolean>
 
-	const collector = message.createMessageComponentCollector({
+	if ('editReply' in interaction) {
+		message = await interaction.editReply({
+			content: messageList.slice(start, end).join('\n'),
+			components: [row],
+		})
+	} else if ('edit' in interaction) {
+		message = await interaction.edit({
+			content: messageList.slice(start, end).join('\n'),
+			components: [row],
+		})
+	}
+
+
+	const collector = message!.createMessageComponentCollector({
 		componentType: ComponentType.Button,
-		filter: btn => btn.user.id === interaction.user.id,
+		// filter: btn => btn.user.id === interaction.user.id,
 	})
 	collector.on('collect', async btn => {
 		if (btn.customId === 'next') {
