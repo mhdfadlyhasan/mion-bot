@@ -6,7 +6,12 @@ import { sendTextWithButton } from "../../lib/text_button"
 export async function mentionJisho(interaction: OmitPartialGroupDMChannel<Message<boolean>>) {
 	let message: string = ''
 	if (interaction.type == MessageType.Reply) {
-		message += (await interaction.fetchReference()).content
+		const repliedChat = await interaction.fetchReference()
+		if (repliedChat.author.id == process.env.CLIENT_ID) {
+			message += repliedChat.content
+			return
+		}
+
 	} else {
 		message += interaction.content
 	}
