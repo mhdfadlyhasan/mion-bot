@@ -7,8 +7,9 @@ export async function mentionJisho(interaction: OmitPartialGroupDMChannel<Messag
 	let message: string = ''
 	if (interaction.type == MessageType.Reply) {
 		const repliedChat = await interaction.fetchReference()
-		if (repliedChat.author.id == process.env.CLIENT_ID) {
+		if (repliedChat.author.id !== process.env.CLIENT_ID) {
 			message += repliedChat.content
+		} else {
 			return
 		}
 
