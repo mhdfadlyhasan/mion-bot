@@ -1,6 +1,6 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js'
 import { searchYoutuberByName } from '../../query/search-youtuber'
-import { redisGetKey, redisSet } from '../../tools/redis.ts'
+import { redisGetKey, redisSet } from '../../tools/redis/index.ts'
 import searchStream from '../../query/search-stream/index.ts'
 
 export default {

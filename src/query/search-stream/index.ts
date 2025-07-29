@@ -1,5 +1,5 @@
 import { type Youtuber } from '../../data_type/youtuber.ts'
-import { redisGetWildCard, redisSet } from '../../tools/redis.ts/index.ts'
+import { redisGetWildCard, redisSet } from '../../tools/redis/index.ts'
 import { setNotification } from '../../lib/notification.ts'
 import { getYoutuberUpcomingVideo, getYoutuberUpcomingVideoV2 } from '../youtuber-upcoming-video-query/index.ts'
 import { searchYoutuberByName } from '../search-youtuber/index.ts'

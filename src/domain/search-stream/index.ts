@@ -4,7 +4,7 @@ import { setNotification } from "../../lib/notification.ts"
 import { FindYoutuberFromCache, searchYoutuberByName } from "../../query/search-youtuber"
 import { getVideoDetailList } from "../../query/video-detail"
 import { getYoutuberUpcomingVideoV2 } from "../../query/youtuber-upcoming-video-query"
-import { redisSet } from "../../tools/redis.ts"
+import { redisSet } from "../../tools/redis/index.ts"
 
 export async function searchStreamList(nameList: string[]): Promise<string> {
 	let youtuberMap = new Map<string, Youtuber>()

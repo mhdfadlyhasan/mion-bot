@@ -1,6 +1,6 @@
 import { Innertube } from 'youtubei.js'
 import type { Youtuber } from '../../data_type/youtuber'
-import { redisGet } from '../../tools/redis.ts'
+import { redisGet } from '../../tools/redis/index.ts'
 
 export async function searchYoutuberByName(input: string): Promise<Youtuber> {
 	const innertube = await Innertube.create({})
