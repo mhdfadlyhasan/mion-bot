@@ -7,6 +7,7 @@ import kanjiBreakdown from '../../commands/kanji-breakdown/index.ts'
 import { mentionJisho } from '../../domain/mention-jisho/index.ts'
 import { redisGetAllKey } from '../redis/index.ts'
 import { searchStreamList } from '../../domain/search-stream/index.ts'
+import { connectToDatabase } from '../mongo/index.ts'
 let channel: Channel | undefined
 const token = process.env.DISCORD_API_KEY!
 
@@ -29,6 +30,7 @@ chatClient.once(Events.ClientReady, async readyClient => {
 	channel = chatClient.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
 	const names = await redisGetAllKey()
 	console.log(searchStreamList(names))
+	connectToDatabase()
 })
 
 chatClient.once(Events.ShardDisconnect, disconnectClient => {

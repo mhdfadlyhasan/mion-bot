@@ -1,9 +1,12 @@
-import { ObjectId, MongoClient } from "mongodb"
+import { ObjectId, MongoClient, Db, Collection } from "mongodb"
 
-// const mongoClient = new MongoClient(process.env.MONGODB_CONNECTION_STRING!)
-// 	.on('error', (err) => console.log('mongo Client Error', err))
-// 	.connect()
+export async function connectToDatabase() {
+	const client: MongoClient = new MongoClient(process.env.MONGODB_CONNECTION_STRING!)
+	await client.connect()
+	const dbName = "server"
+	const db: Db = client.db(dbName)
 
-// export async function mongoSet(key: string, input: string): Promise<string | null> {
-// 	return await mongoClient.set(key, input)
-// }
+	const serverCollection: Collection = db.collection(dbName)
+
+	console.log(`Successfully connected to database: ${db.databaseName} and collection: ${serverCollection.collectionName}`)
+}
