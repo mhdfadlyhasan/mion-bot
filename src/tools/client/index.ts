@@ -24,7 +24,10 @@ declare module 'discord.js' {
 	}
 }
 
-const chatClient = await new DiscordClient({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] })
+const chatClient = await new DiscordClient({
+	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+	shards: 'auto',
+})
 chatClient.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`)
 	channel = chatClient.channels.cache.get(process.env.TEST_DISCORD_CHANNEL_ID!)
