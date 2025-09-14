@@ -24,8 +24,6 @@ jobs:
           ssh-add ~/.ssh/id_ed25519
           cd ~/mion-bot
           git pull origin main
-          bun install -g pm2
           bun install
-          export PATH="$HOME/.bun/bin:$PATH"
-          pm2 reload mion-bot
+          bun pm2 reload mion-bot
         EOF
