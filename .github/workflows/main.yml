@@ -26,6 +26,6 @@ jobs:
           git pull origin main
           bun install -g pm2
           bun install
-          PATH="/home/mhdfadlyhasan/snap/bun-js/75/.bun/bin:$PATH"
+          export PATH="/home/mhdfadlyhasan/snap/bun-js/75/.bun/bin:$PATH"
           pm2 reload mion-bot
         EOF
