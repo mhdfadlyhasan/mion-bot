@@ -9,7 +9,6 @@ export async function setNotification(name: string, message: string, delay: numb
 	if (isStartingSoon) {
 		if (notificationMap[name] != null) {
 			clearTimeout(notificationMap[name])
-			console.log('clearing notification')
 		}
 		const timeout = setTimeout(() => {
 			sendMessage(message)

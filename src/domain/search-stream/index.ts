@@ -14,7 +14,6 @@ export async function searchStreamList(nameList: string[]): Promise<string> {
 		try {
 			let [youtuber, fullName] = await FindYoutuberFromCache(name)
 			if (youtuber != null && hasUpcomingStream(youtuber)) {
-				console.log(processOutput(youtuber))
 				continue
 			} else if (youtuber == null) {
 				youtuber = await searchYoutuberByName(fullName)

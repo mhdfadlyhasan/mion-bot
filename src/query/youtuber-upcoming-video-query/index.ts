@@ -41,7 +41,6 @@ export async function getYoutuberUpcomingVideo(channelID: string): Promise<[Live
 
 
 export async function getYoutuberUpcomingVideoV2(channelID: string): Promise<[LivestreamItem | null, string]> {
-	console.log('using search v2')
 	let upcomingStream: LivestreamItem | null = null
 
 	const upcomingVideoResponse = await fetch(getTemplateUpcomingVideoV2(channelID!))
