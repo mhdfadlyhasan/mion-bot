@@ -25,4 +25,5 @@ async function deploy() {
 	}
 }
 deploy()
+ChatClient.ChatClient.login(token)
 job.start()

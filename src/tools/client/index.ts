@@ -75,8 +75,6 @@ chatClient.on(Events.InteractionCreate, async interaction => {
 	}
 })
 
-chatClient.login(token)
-
 export default {
 	ChatClient: chatClient,
 	Channel: channel,
