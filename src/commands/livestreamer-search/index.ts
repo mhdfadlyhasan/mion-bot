@@ -22,7 +22,7 @@ export default {
 		// }
 
 		if (message !== undefined) {
-			await interaction.reply(message)
+			await interaction.reply(message.toString())
 		}
 	},
 }

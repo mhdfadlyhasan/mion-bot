@@ -66,6 +66,6 @@ export async function searchStreamList(nameList: string[]): Promise<string> {
 function processOutput(detail: Youtuber): string {
 	const startTime = new Date(detail.latestStreamTime).toLocaleString('en-us', { timeZone: 'Asia/Bangkok' })
 	const delay = new Date(detail.latestStreamTime).getTime() - Date.now()
-	if (delay > 0) setNotification(detail.channelID as string, 'Its about to start! \n' + detail.latestStreamLink, delay)
+	if (delay > 0) setNotification(detail.channelID as string, 'Its about to start! ' + detail.channelName + "\n" + detail.latestStreamLink, delay)
 	return ('Live time ' + startTime + '\n' + detail.latestStreamLink)
 }
