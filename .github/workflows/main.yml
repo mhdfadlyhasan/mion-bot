@@ -25,5 +25,5 @@ jobs:
           cd ~/mion-bot
           git pull origin main
           bun install
-          bun pm2 reload mion-bot
+          pm2 reload mion-bot
         EOF
