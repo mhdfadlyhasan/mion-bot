@@ -16,3 +16,10 @@ export async function setNotification(name: string, message: string, delay: numb
 		notificationMap[name] = timeout
 	}
 }
+
+export function clearNotification(name: string) {
+	if (notificationMap[name] != null) {
+		clearTimeout(notificationMap[name]!)
+		notificationMap[name] = null
+	}
+}

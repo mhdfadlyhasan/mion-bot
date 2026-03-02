@@ -33,33 +33,39 @@ export async function sendTextWithButton(interaction: ChatInputCommandInteractio
 
 	const collector = message!.createMessageComponentCollector({
 		componentType: ComponentType.Button,
-		// filter: btn => btn.user.id === interaction.user.id,
+		idle: 60_000,
 	})
+
 	collector.on('collect', async btn => {
 		if (btn.customId === 'next') {
 			start = start + BATCH_LENGTH
 		} else if (btn.customId === 'back') {
-			start = start - BATCH_LENGTH  // wrap around backwards
-		}
-		if (start < 0 || start > messageList.length) start = 0
-		end = start + BATCH_LENGTH
-
-		if (end > messageList.length) {
-			end = messageList.length
+			start = Math.max(0, start - BATCH_LENGTH)
 		}
 
-		if (start > 0 && back.data.disabled) {
-			back.setDisabled(false)
-			row = new ActionRowBuilder<ButtonBuilder>().addComponents(back, next)
-		} else if (start == 0 && !back.data.disabled) {
-			back.setDisabled(true)
-			row = new ActionRowBuilder<ButtonBuilder>().addComponents(back, next)
-		}
+		end = Math.min(start + BATCH_LENGTH, messageList.length)
+
+		const newRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
+			new ButtonBuilder()
+				.setCustomId('back')
+				.setLabel('Back')
+				.setStyle(ButtonStyle.Danger)
+				.setDisabled(start === 0),
+			new ButtonBuilder()
+				.setCustomId('next')
+				.setLabel('Next')
+				.setStyle(ButtonStyle.Primary)
+				.setDisabled(end === messageList.length)
+		)
 
 		await btn.update({
 			content: messageList.slice(start, end).join('\n'),
-			components: [row],
+			components: [newRow],
 		})
+	})
+
+	collector.on('end', async () => {
+		await message.edit({ components: [] }).catch(() => null)
 	})
 
 }

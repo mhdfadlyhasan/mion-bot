@@ -2,7 +2,7 @@ export function ParseTimeString(input: string): number | null {
 	const match = input.match(/^(\d+)(s|m|h)$/)
 	if (!match) return null
 
-	const value = parseInt(match[1]!)
+	const value = parseInt(match[1] as string)
 	const unit = match[2]
 
 	switch (unit) {

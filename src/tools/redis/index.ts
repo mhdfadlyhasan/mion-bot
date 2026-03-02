@@ -9,7 +9,7 @@ export async function redisSet(key: string, input: string): Promise<string | nul
 	return await redisClient.set(key, input)
 }
 
-export async function redisSetJson(key: string, input: string): Promise<string | null> {
+export async function redisSetJson<T>(key: string, input: T): Promise<string | null> {
 	return await redisClient.set(key, JSON.stringify(input))
 }
 

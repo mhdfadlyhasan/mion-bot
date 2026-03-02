@@ -5,7 +5,7 @@ export function textMultiChoice(content: string, optionList: string[]): {
 	components: ActionRowBuilder<ButtonBuilder>[]
 } {
 	const row = new ActionRowBuilder<ButtonBuilder>()
-	if (optionList.length === 0) {
+	if (!optionList || optionList.length === 0) {
 		const button = new ButtonBuilder()
 			.setCustomId('0')
 			.setLabel('No child')
@@ -17,21 +17,19 @@ export function textMultiChoice(content: string, optionList: string[]): {
 			components: [row],
 		})
 	}
-	else {
-		for (const idx in optionList) {
-			if (optionList[idx] === undefined) {
-				continue
-			}
-			const button = new ButtonBuilder()
-				.setCustomId(idx)
-				.setLabel(optionList[idx])
-				.setStyle(ButtonStyle.Primary)
-			row.addComponents(button)
-		}
-	}
 
-	return ({
-		content: content,
-		components: [row],
-	})
-}
+	for (let idx = 0; idx < optionList.length; idx++) {
+		const option = optionList[idx]
+		if (option === undefined || option === null) {
+			continue
+		}
+		const button = new ButtonBuilder()
+			.setCustomId(idx.toString())
+			.setLabel(option)
+			.setStyle(ButtonStyle.Primary)
+
+		return ({
+			content: content,
+			components: [row],
+		})
+	}
